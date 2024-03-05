@@ -10,7 +10,9 @@ class PromocaoRepository extends BaseRepository<PromocaoEntity> {
   }
 
   public async getAllPromocoes(): Promise<PromocaoEntity[]> {
-    return await this.findAll();
+    //return await this.findAll();
+    const promocoesJson = JSON.parse(fs.readFileSync('./src/models/promocoes.json', 'utf-8'));
+    return promocoesJson
   }
 
   public async getPromocaoById(id: string): Promise<PromocaoEntity | null> {
@@ -26,9 +28,6 @@ class PromocaoRepository extends BaseRepository<PromocaoEntity> {
     }
   
   return null;
-
-
-
   }
 
   public async createPromocao(data: PromocaoEntity): Promise<PromocaoEntity> {
