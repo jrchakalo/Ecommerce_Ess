@@ -210,6 +210,112 @@ defineFeature(feature, (test) => {
         });
     });
 
+    test('Falha no cadastro de promoção por Nome inválido Serviço', ({ given, when, then, and }) => {
+        given(/^que o usuário "(.*)" está logado no sistema como "(.*)"$/, async (name,userType ) => {
+            if (!(userType == 'administrador')) {
+                response.status = 400;
+            }
+        });
+
+        and(/^o sistema possui o cupom de promoção "(.*)"$/, async (nome) => {
+            const promocao = new PromocaoModel({
+                nome: nome,
+                valor: '10',
+                tipo: 'Geral',
+                validade: 'Usuário com 3 meses ou menos no sistema'
+            });
+            promocao.salvarPromocao(promocao)
+        });
+
+        and(/^o sistema possui o cupom de promoção "(.*)"$/, async (nome) => {
+            const promocao = new PromocaoModel({
+                nome: nome,
+                valor: '60',
+                tipo: 'Livros',
+                validade: 'Usuário com mais de 12 meses no sistema ou mais de 12 compras'
+            });
+            promocao.salvarPromocao(promocao)
+        });
+        and(/^o sistema possui o cupom de promoção "(.*)"$/, async (nome) => {
+            const promocao = new PromocaoModel({
+                nome: nome,
+                valor: '70',
+                tipo: 'Geral',
+                validade: 'Usuário com 3 meses ou menos no sistema'
+            });
+            promocao.salvarPromocao(promocao)
+        });
+
+        and(/^está na página "(.*)"$/, async (page) => {
+            response = await request.get(page);
+            expect(response.status).toBe(200);
+            expect(response.body.text).toBe('Cadastro de Promoção');
+        });
+
+        when(/^preenche o campo "(.*)" com "(.*)"$/, async (campo, valor) => {
+            promocaoData.preencherCampo(campo, valor);
+        });
+
+        and(/^preenche o campo "(.*)" com "(.*)"$/, async (campo, valor) => {
+            promocaoData.preencherCampo(campo, valor);
+        });
+
+        and(/^preenche o campo "(.*)" com "(.*)"$/, async (campo, valor) => {
+            promocaoData.preencherCampo(campo, valor);
+        });
+
+        and(/^preenche o campo "(.*)" com "(.*)"$/, async (campo, valor) => {
+            promocaoData.preencherCampo(campo, valor);
+        });
+
+        and (/^uma requisição POST for enviada para "(.*)" enviando os dados do novo cupom$/, async (rota) => {
+            response = await request.post(rota).send(promocaoData);
+        });
+
+        then(/^uma mensagem de aviso é enviada "(.*)"$/, async(expectedMessage) => {
+            expect(response.status).toBe(400);
+            expect(response.body.msg).toBe(expectedMessage);
+            //promocaoData.salvarPromocao(promocaoData);
+        });
+
+        and(/^o sistema tem armazenado em "(.*)" o cupom "(.*)"$/, async (local,id) => {
+            if (local == 'Cupons cadastrados') {
+                expect(promocaoData.verificarExistente(id)).toBe(true);
+            }
+        });
+
+        and(/^o sistema tem armazenado em "(.*)" o cupom "(.*)"$/, async (local,id) => {
+            if (local == 'Cupons cadastrados') {
+                expect(promocaoData.verificarExistente(id)).toBe(true);
+            }
+        });
+
+        and(/^o sistema tem armazenado em "(.*)" o cupom "(.*)"$/, async (local,id) => {
+            if (local == 'Cupons cadastrados') {
+                expect(promocaoData.verificarExistente(id)).toBe(true);
+            }
+        });
+        and(/^o cupom "(.*)" tem campo "(.*)" com "(.*)"$/, async (id,campo,data) => {
+            expect(promocaoData.verificarPromocaoByCampo(id,campo,data)).toBe(true);
+
+        });
+
+        and(/^o cupom "(.*)" tem campo "(.*)" com "(.*)"$/, async (id,campo,data) => {
+            expect(promocaoData.verificarPromocaoByCampo(id,campo,data)).toBe(true);
+
+        });
+
+        and(/^o cupom "(.*)" tem campo "(.*)" com "(.*)"$/, async (id,campo,data) => {
+            expect(promocaoData.verificarPromocaoByCampo(id,campo,data)).toBe(true);
+
+        });
+
+        and(/^o cupom "(.*)" tem campo "(.*)" com "(.*)"$/, async (id,campo,data) => {
+            expect(promocaoData.verificarPromocaoByCampo(id,campo,data)).toBe(true);
+
+        });
+     });
+
     // test ('Falha no Cadastro de promoção por Email já Cadastrado', ({ given, when, then, and }) => {
     //     given(/^estou na página "(.*)"$/, async (page) => {
     //         if (page == 'Cadastro de promoção') {

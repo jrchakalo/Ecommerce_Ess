@@ -87,6 +87,28 @@ Scenario: Falha no cadastro de promoção por Valor inválido Serviço
 #     Then uma mensagem de aviso é exibida "Já existe um cupom com este nome. Informe um outro nome para este cupom."
 #     And a página "Cupons cadastrados" é exibida contendo os cupons de promoção cadatrasdos nessa ordem "JULIOVERNE10", "JULIOVERNE60" e "JULIOVERNE70" 
 
+Scenario: Falha no cadastro de promoção por Nome inválido Serviço
+     Given que o usuário "Cora Coralina" está logado no sistema como "administrador"
+     And o sistema possui o cupom de promoção "JULIOVERNE10"
+     And o sistema possui o cupom de promoção "JULIOVERNE60"
+     And o sistema possui o cupom de promoção "JULIOVERNE70"
+     And está na página "/api/promocoes/cadastro"
+     When preenche o campo "nome" com "JULIOVERNE60"
+     And preenche o campo "valor" com "59"
+     And preenche o campo "tipo" com "Geral"
+     And preenche o campo "validade" com "Usuário com 3 meses ou menos no sistema"
+     And uma requisição POST for enviada para "/api/promocoes/cadastro" enviando os dados do novo cupom
+     Then uma mensagem de aviso é enviada "Promoção com ID existente"
+     #And o sistema permanece com apenas "3" cupons cadastrados
+     And o sistema tem armazenado em "Cupons cadastrados" o cupom "JULIOVERNE10"
+     And o sistema tem armazenado em "Cupons cadastrados" o cupom "JULIOVERNE60"
+     And o sistema tem armazenado em "Cupons cadastrados" o cupom "JULIOVERNE70"
+     And o cupom "JULIOVERNE60" tem campo "nome" com "JULIOVERNE60"
+     And o cupom "JULIOVERNE60" tem campo "valor" com "60"
+     And o cupom "JULIOVERNE60" tem campo "tipo" com "Livros"
+     And o cupom "JULIOVERNE60" tem campo "validade" com "Usuário com mais de 12 meses no sistema ou mais de 12 compras"  
+     
+
 # Scenario: Falha no cadastro de promoção por Nome inválido Serviço
 #     Given que o usuário "Júlio Vierne" está logado no sistema como "administrador"
 #     And o sistema possui os cupons de promoção "JULIOVERNE10", "JULIOVERNE70" e "JULIOVERNE60"
