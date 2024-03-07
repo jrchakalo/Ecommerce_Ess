@@ -17,9 +17,10 @@ class PromocaoController {
 
   private initRoutes() {
     // Rota para criar uma nova promoção
-    this.router.post(`${this.prefix}/cadastro`, (req: Request, res: Response) =>
-        this.createPromocao(req, res)
-    );
+    this.router.post(`${this.prefix}/cadastro`, (req: Request, res: Response) => {
+      //if()
+      this.createPromocao(req, res);
+    });
 
     //Cria um GET para pagina de Cadastro 
     this.router.get(`${this.prefix}/cadastro`, (req: Request, res: Response) =>
@@ -45,7 +46,7 @@ class PromocaoController {
     );
  }
 
- private async createPromocao(req: Request, res: Response) {
+ private async createPromocao2(req: Request, res: Response) {
   // Extrai os dados do corpo da requisição
   const promocao = await this.promocaoService.createPromocao(new PromocaoEntity(req.body));
 
@@ -56,15 +57,19 @@ class PromocaoController {
   }).handle(res);
 }
 
-  private async createPromocao2(req: Request, res: Response) {
+  private async createPromocao(req: Request, res: Response) {
     // Extrai os dados do corpo da requisição
-    const promocao = await this.promocaoService.createPromocao2(new PromocaoEntity(req.body));
+    const promocao = await this.promocaoService.createPromocao(new PromocaoEntity(req.body))
+
+    //console.log("REQ: ", req);
+    console.log("PROMOÇÃO: ", promocao);
 
     // Retorna a nova promoção criada
     return new SuccessResult({
         msg: promocao.msg,
-        data: promocao.data,
-        code: promocao.code
+        data: promocao
+        // .body,
+        // code: promocao.code
     }).handle(res);
   }
 

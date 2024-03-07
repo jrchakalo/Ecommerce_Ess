@@ -29,6 +29,21 @@ Feature: Cadastro e Manutenção de Promoções
 #     Then uma mensagem de confirmação é exibida "Cadastro de promoção concluído com sucesso!"
 #     And a pagina "Cupons cadastrados" é exibida contendo os cupons de promoção cadatrados que inclui o cupom "JULIOVERNEBLACK"
 
+# Scenario: Cadastro de promoção com sucesso com campo valor em branco Serviço
+#     Given que o usuário "Júlio Vierne" está logado no sistema como "administrador"
+#     And está na página "Cadastro de Promoção"
+#     When preenche o campo "nome" com "JULIOVERNE10"
+#     And preenche o campo "tipo" com "Livros"
+#     And preenche o campo "validade" com "Usuário com mais de 12 meses no sistema ou mais de 12 compras"
+#     And uma requisição POST for enviada para "/api/promocoes/cadastro" enviando os dados do novo cupom
+#     Then uma mensagem de confirmação é enviada "Cadastro de promoção concluído com sucesso!"
+#     And o sistema tem armazenado em "Cupons cadastrados" o cupom "JULIOVERNE10"
+#     And o cupom "JULIOVERNE10" tem campo "nome" com "JULIOVERNE10"
+#     And o cupom "JULIOVERNE10" tem campo "valor" com "10"
+#     And o cupom "JULIOVERNE10" tem campo "tipo" com "Livros"
+#     And o cupom "JULIOVERNE10" tem campo "validade" com "Usuário com mais de 12 meses no sistema ou mais de 12 compras"
+
+
 # Scenario: Cadastro de promoção com sucesso com campo valor em branco GUI
 #     Given que o usuário "Cora Coralina" está logado no sistema como "administrador"
 #     And está na página "Cadastro de Promoções"
@@ -38,20 +53,6 @@ Feature: Cadastro e Manutenção de Promoções
 #     And seleciona "Cadastrar promoção"
 #     Then uma mensagem de confirmação é exibida "Cadastro de promoção concluído com sucesso!"
 #     And a página "Cupons cadastrados" é exibida contendo os cupons de promoção cadastrados e dentre eles está o cupom "JULIOVERNE10"
-
-Scenario: Cadastro de promoção com sucesso com campo valor em branco Serviço
-    Given que o usuário "Júlio Vierne" está logado no sistema como "administrador"
-    And está na página "Cadastro de Promoção"
-    When preenche o campo "nome" com "JULIOVERNE10"
-    And preenche o campo "tipo" com "Livros"
-    And preenche o campo "validade" com "Usuário com mais de 12 meses no sistema ou mais de 12 compras"
-    And uma requisição POST for enviada para "/api/promocoes/cadastro" enviando os dados do novo cupom
-    Then uma mensagem de confirmação é enviada "Cadastro de promoção concluído com sucesso!"
-    And o sistema tem armazenado em "Cupons cadastrados" o cupom "JULIOVERNE10"
-    And o cupom "JULIOVERNE10" tem campo "nome" com "JULIOVERNE10"
-    And o cupom "JULIOVERNE10" tem campo "valor" com "10"
-    And o cupom "JULIOVERNE10" tem campo "tipo" com "Livros"
-    And o cupom "JULIOVERNE10" tem campo "validade" com "Usuário com mais de 12 meses no sistema ou mais de 12 compras"
 
 # Scenario: Falha no cadastro de promoção por valor inválido GUI
 #     Given que o usuário "Viajante" está logado no sistema como "administrador"

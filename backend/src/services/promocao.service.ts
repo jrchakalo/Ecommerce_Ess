@@ -27,7 +27,7 @@ public async getAllPromocoes(): Promise<PromocaoModel[]> {
 
     if (!promocaoEntity) {
       throw new HttpNotFoundError({
-        msg: 'Promocao not found',
+        msg: 'Promoção não encontrada.',
         msgCode: PromocaoServiceMessageCode.promocao_not_found,
       });
     }
@@ -37,24 +37,25 @@ public async getAllPromocoes(): Promise<PromocaoModel[]> {
     return promocaoModel;
   }
 
-  public async createPromocao(data: PromocaoEntity): Promise<PromocaoModel> {
+  public async createPromocao2(data: PromocaoEntity): Promise<PromocaoModel> {
     const promocaoEntity = await this.promocaoRepository.createPromocao(data);
     const promocaoModel = new PromocaoModel(promocaoEntity);
 
     return promocaoModel;
   }
 
-  public async createPromocao2(data: PromocaoEntity): Promise<SuccessResult> {
+  public async createPromocao(data: PromocaoEntity): Promise<SuccessResult> {
     let promocao = new PromocaoModel(data);
-    if (this.validaPromocao(promocao).status == 200){
+    let validacao = this.validaPromocao(promocao)
+    if (validacao.status == 200){
       const promocaoEntity = await this.promocaoRepository.createPromocao(data);
       promocao = new PromocaoModel(promocaoEntity);
     }
 
     return new SuccessResult({
-      msg: this.validaPromocao(promocao).msg,
+      msg: validacao.msg,
       data: promocao,
-      code: this.validaPromocao(promocao).status
+      code: validacao.status
     });
   }
 
@@ -80,6 +81,7 @@ public async getAllPromocoes(): Promise<PromocaoModel[]> {
       msg: ""
     };
     const verifBranco = promocaoData.verificarBranco(promocaoData);
+
     if(promocaoData.verificarExistente(promocaoData.id)) {
         console.log("Id: " + promocaoData.id);
         console.log("Nome: " + promocaoData.nome);
@@ -111,10 +113,9 @@ public async getAllPromocoes(): Promise<PromocaoModel[]> {
         console.log('2 '+ JSON.stringify(returnData));
     }
 
-    return returnData;
-}
+    return returnData; 
+  }
 
-  
 }
 
 export default PromocaoService;
