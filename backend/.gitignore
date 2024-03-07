@@ -34,3 +34,13 @@ lib/
 
 # Deploy
 .vercel
+
+# Arquivos gerenciados por outros colaboradores
+tests/controllers/email.steps.tests
+tests/controllers/test.controller.spec.ts
+tests/controllers/test.steps.ts
+tests/controllers/users.steps.ts
+tests/services/email.service.steps.ts
+tests/services/test.service.spec.ts
+tests/services/test.service.steps.ts
+
