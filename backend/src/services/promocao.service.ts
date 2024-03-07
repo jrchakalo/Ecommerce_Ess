@@ -46,9 +46,10 @@ public async getAllPromocoes(): Promise<PromocaoModel[]> {
 
   public async createPromocao(data: PromocaoEntity): Promise<SuccessResult> {
     let promocao = new PromocaoModel(data);
-    let validacao = this.validaPromocao(promocao)
+    let validacao = this.validaPromocao(promocao);
+    console.log("VALIDACAO: " + validacao);
     if (validacao.status == 200){
-      const promocaoEntity = await this.promocaoRepository.createPromocao(data);
+      const promocaoEntity = await this.promocaoRepository.createPromocao(validacao.promocao);
       promocao = new PromocaoModel(promocaoEntity);
     }
 
@@ -78,7 +79,8 @@ public async getAllPromocoes(): Promise<PromocaoModel[]> {
     //const promocaoData = new PromocaoModel(promocao);
     let returnData = {
       status: 400,
-      msg: ""
+      msg: "",
+      promocao: promocaoData
     };
     const verifBranco = promocaoData.verificarBranco(promocaoData);
 
