@@ -106,19 +106,7 @@ Scenario: Falha no cadastro de promoção por Nome inválido Serviço
      And o cupom "JULIOVERNE60" tem campo "nome" com "JULIOVERNE60"
      And o cupom "JULIOVERNE60" tem campo "valor" com "60"
      And o cupom "JULIOVERNE60" tem campo "tipo" com "Livros"
-     And o cupom "JULIOVERNE60" tem campo "validade" com "Usuário com mais de 12 meses no sistema ou mais de 12 compras"  
-     
-
-# Scenario: Falha no cadastro de promoção por Nome inválido Serviço
-#     Given que o usuário "Júlio Vierne" está logado no sistema como "administrador"
-#     And o sistema possui os cupons de promoção "JULIOVERNE10", "JULIOVERNE70" e "JULIOVERNE60"
-#     And o cupom "JULIOVERNE60" possui "Valor" igual a "60", "Tipo" igual a "Livro" e "Condições de validade" igual a "usuário com 3 meses ou menos no sistema"
-#     And faz uso da feature "Cadastro e Manutenção de Promoções" #Fiquei na dúvida quanto a necessidade desta linha
-#     When solicita o cadastro de uma promoção com os seguintes valores:
-#     | Nome            | Valor   | Tipo  | Condições de validade                                        |
-#     | JULIOVERNE60    | 59      | Geral | usuário com mais de 12 meses no sistema ou mais de 12 compras|
-#     Then o sistema armazena em "Cupons cadastrados" é exibida contendo os cupons de promoção cadastrados "JULIOVERNE10", "JULIOVERNE70" e "JULIOVERNE60"
-#     And no cupom "JULIOVERNE60" a informação "Valor" é igual a "60", "Tipo" é igual a "Livro" e "Condições de validade" é igual a "usuário com 3 meses ou menos no sistema"
+     And o cupom "JULIOVERNE60" tem campo "validade" com "Usuário com mais de 12 meses no sistema ou mais de 12 compras" 
 
 # Scenario: Cadastro de promoção teste de seleção Tipo GUI
 #     Given que o usuário "Naruto" está logado no sistema como "administrador"
