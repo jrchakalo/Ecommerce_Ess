@@ -44,7 +44,7 @@ defineFeature(feature, (test) => {
                 nome: nome,
                 valor: '10',
                 tipo: 'Geral',
-                validade: 'validade" com "Usuário com 3 meses ou menos no sistema'
+                validade: 'Usuário com 3 meses ou menos no sistema'
             });
             promocao.salvarPromocao(promocao)
         });
@@ -54,7 +54,7 @@ defineFeature(feature, (test) => {
                 nome: nome,
                 valor: '70',
                 tipo: 'Geral',
-                validade: 'validade" com "Usuário com 3 meses ou menos no sistema'
+                validade: 'Usuário com 3 meses ou menos no sistema'
             });
             promocao.salvarPromocao(promocao)
         });
