@@ -67,9 +67,8 @@ class PromocaoController {
     // Retorna a nova promoção criada
     return new SuccessResult({
         msg: promocao.msg,
-        data: promocao
-        // .body,
-        // code: promocao.code
+        data: promocao,
+        code: promocao.code
     }).handle(res);
   }
 
