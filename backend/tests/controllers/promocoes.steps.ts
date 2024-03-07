@@ -81,32 +81,8 @@ defineFeature(feature, (test) => {
             promocaoData.preencherCampo(campo, valor);
         });
 
-        and (/^solicita o cadastro da promoção$/, async () => {
-            response = await request.post('/api/promocoes/cadastro').send(promocaoData);
-            // const verifBranco = promocaoData.verificarBranco(promocaoData);
-            // if(promocaoData.verificarExistente(promocaoData.id)) {
-            //     console.log("Id: " + promocaoData.id);
-            //     console.log("Nome: " + promocaoData.nome);
-            //     response.status = 400;
-            //     console.log('1.1 '+ JSON.stringify(response));
-
-            // }else if(verifBranco == 1){
-            //     response.status = 400;
-            //     console.log('1.2 '+ JSON.stringify(response));
-
-            // }else if(verifBranco == 2){
-            //     promocaoData.valor = '10';
-            //     response = await request.post('/api/promocoes/cadastro').send(JSON.stringify(promocaoData));
-            //     console.log('1 '+ JSON.stringify(response));
-
-            // }else if(!promocaoData.verificarValor()){
-            //     response.status = 400;
-            //     console.log('1 '+ JSON.stringify(response));
-                
-            // }else{  
-            //     response = await request.post('/api/promocoes/cadastro').send(JSON.stringify(promocaoData));
-            //     console.log('2 '+ JSON.stringify(response));
-            // }
+        and (/^uma requisição POST for enviada para "(.*)" enviando os dados do novo cupom$/, async (rota) => {
+            response = await request.post(rota).send(promocaoData);
         });
 
         then(/^uma mensagem de confirmação é enviada "(.*)"$/, async(expectedMessage) => {
@@ -162,7 +138,6 @@ defineFeature(feature, (test) => {
         and (/^uma requisição POST for enviada para "(.*)" enviando os dados do novo cupom$/, async (rota) => {
             console.log("PROMOCAODATA: " + JSON.stringify(promocaoData));
             response = await request.post(rota).send(promocaoData);
-            //response = await request.post('/api/promocoes/cadastro').send(promocaoData);
         });
 
         then(/^uma mensagem de confirmação é enviada "(.*)"$/, async(expectedMessage) => {
@@ -196,7 +171,44 @@ defineFeature(feature, (test) => {
 
         });
     });
-    
+
+    test('Falha no cadastro de promoção por Valor inválido Serviço', ({ given, when, then, and }) => {
+        given(/^que o usuário "(.*)" está logado no sistema como "(.*)"$/, async (name,userType ) => {
+            if (!(userType == 'administrador')) {
+                response.status = 400;
+            }
+        });
+        and(/^está na página "(.*)"$/, async (page) => {
+            response = await request.get(page);
+            expect(response.status).toBe(200);
+            expect(response.body.text).toBe('Cadastro de Promoção');
+        });
+        when(/^preenche o campo "(.*)" com "(.*)"$/, async (campo, valor) => {
+            promocaoData.preencherCampo(campo, valor);
+        });
+        and(/^preenche o campo "(.*)" com "(.*)"$/, async (campo, valor) => {
+            promocaoData.preencherCampo(campo, valor);
+        });
+        and(/^preenche o campo "(.*)" com "(.*)"$/, async (campo, valor) => {
+            promocaoData.preencherCampo(campo, valor);
+        });
+        and(/^preenche o campo "(.*)" com "(.*)"$/, async (campo, valor) => {
+            promocaoData.preencherCampo(campo, valor);
+        });
+        and (/^uma requisição POST for enviada para "(.*)" enviando os dados do novo cupom$/, async (rota) => {
+            response = await request.post(rota).send(promocaoData);
+            console.log("MENSAGEM: " +JSON.stringify(response.body.msg));
+        });
+        then(/^uma mensagem de aviso é enviada "(.*)"$/, (expectedMessage) => {
+            expect(response.status).toBe(400);
+            expect(response.body.msg).toBe(expectedMessage);
+        });
+        and(/^o sistema não tem armazenado em  "(.*)" o cupom "(.*)"$/, (local,nome) => {
+            if (local == 'Cupons cadastrados') {
+                expect(promocaoData.verificarExistente(nome)).toBe(false);
+            }
+        });
+    });
 
     // test ('Falha no Cadastro de promoção por Email já Cadastrado', ({ given, when, then, and }) => {
     //     given(/^estou na página "(.*)"$/, async (page) => {

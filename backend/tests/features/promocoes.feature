@@ -13,7 +13,7 @@ Feature: Cadastro e Manutenção de Promoções
      And preenche o campo "valor" com "20"
      And preenche o campo "tipo" com "Geral"
      And preenche o campo "validade" com "Usuário com 3 meses ou menos no sistema"
-     And solicita o cadastro da promoção
+     And uma requisição POST for enviada para "/api/promocoes/cadastro" enviando os dados do novo cupom
      Then uma mensagem de confirmação é enviada "Cadastro de promoção concluído com sucesso!"
      And o sistema tem armazenado em "Cupons cadastrados" o cupom "JULIOVERNE10"
      And o sistema tem armazenado em "Cupons cadastrados" o cupom "JULIOVERNE70" 
@@ -64,15 +64,16 @@ Scenario: Cadastro de promoção com sucesso com campo valor em branco Serviço
 #     Then uma mensagem de aviso é exibida "O valor inserido é inválido. Informe um valor de 10 a 70."
 #     And a página "Cupons cadastrados" é exibida contendo os cupons de promoção cadatrados e dentre eles não está "JULIOVERNE80"
 
-# Scenario: Falha no cadastro de promoção por Valor inválido Serviço
-#     Given que o usuário "Júlio Vierne" está logado no sistema como "administrador"
-#     And está na página "Cadastro de Promoção"
-#     When preenche o campo "nome" com "JULIOVERNE80"
-#     And preenche o campo "valor" com "80"
-#     And preenche o campo "tipo" com "Geral"
-#     And preenche o campo "validade" com "usuário com 3 meses ou menos no sistema"
-#     And uma requisição POST for enviada para "/api/promocoes/cadastro" enviando os dados do novo cupom
-#     Then o sistema armazena em  "Cupons cadastrados" os cupons cadastrados ntre eles não está o cupom "JULIOVERNE80"
+Scenario: Falha no cadastro de promoção por Valor inválido Serviço
+    Given que o usuário "Júlio Vierne" está logado no sistema como "administrador"
+    And está na página "/api/promocoes/cadastro"
+    When preenche o campo "nome" com "JULIOVERNE80"
+    And preenche o campo "valor" com "80"
+    And preenche o campo "tipo" com "Geral"
+    And preenche o campo "validade" com "usuário com 3 meses ou menos no sistema"
+    And uma requisição POST for enviada para "/api/promocoes/cadastro" enviando os dados do novo cupom
+    Then uma mensagem de aviso é enviada "Valor inválido"
+    And o sistema não tem armazenado em  "Cupons cadastrados" o cupom "JULIOVERNE80"
 
 # Scenario: Falha no cadastro de promoção por Nome inválido GUI
 #     Given que o usuário "Viajante" está logado no sistema como "administrador"
