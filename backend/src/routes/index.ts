@@ -7,8 +7,8 @@ import UserController from '../controllers/user.controller'; // Importa o contro
 import UserService from '../services/user.service'; // Import the UserService class
 import PromocaoController from '../controllers/promocao.controler'; // Importa o controlador de promocao
 import PromocaoService from '../services/promocao.service'; // Import the PromocaoService class
-import UserController from '../controllers/user.controller';
-import UserService from '../services/user.service';
+// import UserController from '../controllers/user.controller';
+// import UserService from '../services/user.service';
 import EmailController from '../controllers/email.controller';
 import EmailService from '../services/email.service';
 
