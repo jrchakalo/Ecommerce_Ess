@@ -8,7 +8,7 @@ Feature: Cadastro e Manutenção de Promoções
      Given que o usuário "Cora Coralina" está logado no sistema como "administrador"
      And o sistema possui o cupom de promoção "JULIOVERNE10"
      And o sistema possui o cupom de promoção "JULIOVERNE70"
-     And está na página "Cadastro de Promoção"
+     And está na página "/api/promocoes/cadastro"
      When preenche o campo "nome" com "JULIOVERNEBLACK"
      And preenche o campo "valor" com "20"
      And preenche o campo "tipo" com "Geral"
@@ -31,7 +31,7 @@ Feature: Cadastro e Manutenção de Promoções
 
 # Scenario: Cadastro de promoção com sucesso com campo valor em branco Serviço
 #     Given que o usuário "Júlio Vierne" está logado no sistema como "administrador"
-#     And está na página "Cadastro de Promoção"
+#     And está na página "/api/promocoes/cadastro"
 #     When preenche o campo "nome" com "JULIOVERNE10"
 #     And preenche o campo "tipo" com "Livros"
 #     And preenche o campo "validade" com "Usuário com mais de 12 meses no sistema ou mais de 12 compras"

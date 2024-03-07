@@ -60,11 +60,9 @@ defineFeature(feature, (test) => {
         });
 
         and(/^está na página "(.*)"$/, async (page) => {
-            if (page == 'Cadastro de promoção') {
-                page = 'api/promocoes/cadastro';
-            }
-            const rota = `/${page}`
-            response = await request.get(rota);
+            response = await request.get(page);
+            expect(response.status).toBe(200);
+            expect(response.body.text).toBe('Cadastro de Promoção');
         });
 
         when(/^preenche o campo "(.*)" com "(.*)"$/, async (campo, valor) => {
@@ -164,34 +162,12 @@ defineFeature(feature, (test) => {
     //     });
 
     //     and (/^uma requisição POST for enviada para "(.*)" enviando os dados do novo cupom$/, async (rota) => {
-    //         const verifBranco = promocaoData.verificarBranco(promocaoData);
-    //         if(promocaoData.verificarExistente(promocaoData.id)) {
-    //             response.status = 400;
-    //             console.log('2 '+ JSON.stringify(response));
-
-    //         }else if(verifBranco == 1){
-    //             response.status = 400;
-    //             console.log('3 '+ JSON.stringify(response));
-
-    //         }else if(verifBranco == 2){
-    //             promocaoData.valor = '10';
-    //             response = await request.post(rota).send(JSON.stringify(promocaoData));
-    //             console.log('4 '+ JSON.stringify(response));
-
-    //         }else if(!promocaoData.verificarValor()){
-    //             response.status = 400;
-    //             console.log('1 '+ JSON.stringify(response));
-
-    //         }else{  
-    //             response = await request.post(rota).send(JSON.stringify(promocaoData));
-    //             console.log('5 '+ JSON.stringify(response));
-    //         }
+    //         response = await request.post(rota).send(JSON.stringify(promocaoData));
     //     });
 
     //     then(/^uma mensagem de confirmação é enviada "(.*)"$/, async(expectedMessage) => {
     //         expect(response.status).toBe(200);
     //         expect(response.body.msg).toBe(expectedMessage);
-    //         promocaoData.salvarPromocao(promocaoData);
     //     });
 
     //     and(/^o sistema tem armazenado em "(.*)" o cupom "(.*)"$/, async (local,nome) => {
@@ -201,90 +177,26 @@ defineFeature(feature, (test) => {
     //     });
 
     //     and(/^o cupom "(.*)" tem campo "(.*)" com "(.*)"$/, async (id,campo,data) => {
-    //         expect(promocaoData.verificarPromocao(id,campo,data)).toBe(true);
+    //         expect(promocaoData.verificarPromocaoByCampo(id,campo,data)).toBe(true);
 
     //     });
 
     //     and(/^o cupom "(.*)" tem campo "(.*)" com "(.*)"$/, async (id,campo,data) => {
-    //         expect(promocaoData.verificarPromocao(id,campo,data)).toBe(true);
+    //         expect(promocaoData.verificarPromocaoByCampo(id,campo,data)).toBe(true);
 
     //     });
 
     //     and(/^o cupom "(.*)" tem campo "(.*)" com "(.*)"$/, async (id,campo,data) => {
-    //         expect(promocaoData.verificarPromocao(id,campo,data)).toBe(true);
+    //         expect(promocaoData.verificarPromocaoByCampo(id,campo,data)).toBe(true);
 
     //     });
 
     //     and(/^o cupom "(.*)" tem campo "(.*)" com "(.*)"$/, async (id,campo,data) => {
-    //         expect(promocaoData.verificarPromocao(id,campo,data)).toBe(true);
+    //         expect(promocaoData.verificarPromocaoByCampo(id,campo,data)).toBe(true);
 
     //     });
     // });
     
-    // test ('Falha no Cadastro de promoção por Login já Cadastrado', ({ given, when, then, and }) => {
-    //     given(/^estou na página "(.*)"$/, async (page) => {
-    //         if (page == 'Cadastro de promoção') {
-    //             page = 'api/promocoess/cadastro';
-    //         }
-    //         const rota = '/${page}'
-    //         response = await request.get(rota);
-    //     });
-
-    //     and(/^o promoção de login "(.*)" está cadastrado no sistema$/, async (login) => {
-    //         const promocao = new PromocaoModel({
-    //             nome: 'Teste',
-    //             cpf: '123.456.789-01',
-    //             dataNascimento: new Date('25/10/2000'),
-    //             email: 'teste@teste.com',
-    //             login: login,
-    //             senha: 'senhateste'
-    //         });
-    //         fs.writeFileSync('./src/models/promocoes.json', JSON.stringify());
-    //     });       
-
-    //     when(/^preencho o campo "(.*)" com "(.*)"$/, async (campo, valor) => {
-    //         promocaoData.preencherCampo(campo, valor);
-    //     });
-
-    //     and(/^preencho o campo "(.*)" com "(.*)"$/, async (campo, valor) => {
-    //         promocaoData.preencherCampo(campo, valor);
-    //     });
-
-    //     and(/^preencho o campo "(.*)" com "(.*)"$/, async (campo, valor) => {
-    //         promocaoData.preencherCampo(campo, valor);
-    //     });
-
-    //     and(/^preencho o campo "(.*)" com "(.*)"$/, async (campo, valor) => {
-    //         promocaoData.preencherCampo(campo, valor);
-    //     });
-
-    //     and(/^preencho o campo "(.*)" com "(.*)"$/, async (campo, valor) => {
-    //         promocaoData.preencherCampo(campo, valor);
-    //     });
-
-    //     and(/^preencho o campo "(.*)" com "(.*)"$/, async (campo, valor) => {
-    //         promocaoData.preencherCampo(campo, valor);
-    //     });
-
-    //     and (/^realizo o cadastro do promoção$/, async () => {
-    //         const verifSenha = promocaoData.verificaSenha();
-    //         const verifBranco = promocaoData.verificaBranco();
-    //         if(!promocaoData.verificarExistente('login', promocaoData.login) || !promocaoData.verificarExistente('cpf', promocaoData.cpf) || !promocaoData.verificarExistente('email', promocaoData.email) || !verifBranco || !verifSenha) {
-    //             response = await request.post('/api/promocaos/cadastro').send(promocaoData);
-    //         }else{
-    //             response.status = 400;
-    //         }
-    //     });
-
-    //     then(/^uma mensagem de erro é exibida indicando que "(.*)"$/, (expectedMessage) => {
-    //         if(response.status == 400){
-    //             expect(response.body.msg).toBe(expectedMessage);
-    //         }else{
-    //             expect(response.status).toBe(200);
-    //             expect(response.body.msg).toBe('O cadastro foi realizado com sucesso');
-    //         }
-    //     });
-    // });
 
     // test ('Falha no Cadastro de promoção por Email já Cadastrado', ({ given, when, then, and }) => {
     //     given(/^estou na página "(.*)"$/, async (page) => {

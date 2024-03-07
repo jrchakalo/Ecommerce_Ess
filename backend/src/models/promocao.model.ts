@@ -67,7 +67,7 @@ class PromocaoModel {
         return false;
     }
 
-    verificarCampoPromocao(idPromocao: string, campo: string, data: string): boolean {
+    verificarPromocaoByCampo(idPromocao: string, campo: string, data: string): boolean {
         let promocoesJson = JSON.parse(fs.readFileSync(filePathPromocoes, 'utf-8'));
         
         if (promocoesJson && Array.isArray(promocoesJson)) {
