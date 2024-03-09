@@ -53,10 +53,10 @@ class PromocaoController {
         this.updatePromocao(req, res)
     );
 
-    // // Rota para deletar uma promoção pelo ID
-    // this.router.delete(`${this.prefix}/:id`, (req: Request, res: Response) =>
-    //     this.deletePromocaoById(req, res)
-    // );
+    // Rota para deletar uma promoção pelo ID
+    this.router.delete(`${this.prefix}/:id`, (req: Request, res: Response) =>
+        this.deletePromocaoById(req, res)
+    );
 
     
  }
@@ -93,6 +93,30 @@ class PromocaoController {
     
     // Extrai os dados do corpo da requisição
     const promocao = await this.promocaoService.updatePromocaoById(promocaoId, new PromocaoEntity(req.body));
+    
+    if (!promocao) {
+      // Retorna um erro caso a promoção não seja encontrada
+      return new SuccessResult({
+        msg: 'Promoção não encontrada',
+        data: null,
+        msgCode: 'promocao_not_found',
+        code: 404
+      }).handle(res);
+    }
+    // Retorna a promoção atualizada
+    return new SuccessResult({
+        msg: promocao.msg,
+        data: promocao.data,
+        code: promocao.code
+    }).handle(res);
+  }
+  
+  private async deletePromocaoById(req: Request, res: Response) {
+    // Extrai o ID do usuário da URL
+    const promocaoId = req.params.id;
+
+    // Busca e deleçãao a promoção pelo ID  e extrai os dados do corpo da requisição
+    const promocao = await this.promocaoService.deletePromocaoById(promocaoId);
     
     if (!promocao) {
       // Retorna um erro caso a promoção não seja encontrada

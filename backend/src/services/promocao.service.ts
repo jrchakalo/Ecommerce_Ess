@@ -85,6 +85,25 @@ public async getAllPromocoes(): Promise<PromocaoModel[]> {
     });
   }
 
+  public async deletePromocaoById(id: string): Promise<SuccessResult>  {
+
+    //console.log("ValidacaoUpdate: " + validacao);
+      let promocaoEntity = await this.promocaoRepository.deletePromocaoById(id);
+
+    if (!promocaoEntity) {
+      throw new HttpNotFoundError({
+        msg: 'Promoção não encontrada',
+        msgCode: PromocaoServiceMessageCode.promocao_not_found,
+      });
+    }
+
+    return new SuccessResult({
+      msg: "Promoção removida com sucesso",
+      // data: promocaoEntity,
+      code: 200
+    });
+  }
+
   private validaPromocao (promocaoData: PromocaoModel){
     let returnData = {
       status: 400,

@@ -48,14 +48,8 @@ class PromocaoRepository extends BaseRepository<PromocaoEntity> {
   public async updatePromocaoById(id: string, data: PromocaoEntity): Promise<PromocaoEntity | null> {
     const promocoesJson = JSON.parse(fs.readFileSync(filePathPromocoes, 'utf-8'));
 
-    // console.log("promocoesJson: " + JSON.stringify(promocoesJson));
-    // console.log("promocoesJson[0].id: " + promocoesJson[1].id);
-    // console.log("id: " + id);
-
     // Encontra o usuário no array pelo ID
     const promocaoToUpdate = promocoesJson.find((promocao: PromocaoEntity) => promocao.id === id);
-
-    // console.log("PROMOCAOTOUPDATE: " + JSON.stringify(promocaoToUpdate));
 
     if (promocaoToUpdate) {
         // Atualiza os campos da promoção
@@ -71,6 +65,26 @@ class PromocaoRepository extends BaseRepository<PromocaoEntity> {
     }
     return null; // Promoção não encontrada
   }
+
+  public async deletePromocaoById(id: string): Promise<PromocaoEntity | null> {
+    const promocoesJson = JSON.parse(fs.readFileSync(filePathPromocoes, 'utf-8'));
+
+    // Encontra o índice da promoção a ser deletada no array pelo ID
+    const indexToDelete = promocoesJson.findIndex((promocao: PromocaoEntity) => promocao.id === id);
+
+    if (indexToDelete !== -1) {
+        // Remove a promoção do array
+        const promocaoDeletada = promocoesJson.splice(indexToDelete, 1)[0];
+
+        // Escreve o array de promoções atualizado de volta no arquivo JSON
+        fs.writeFileSync(filePathPromocoes, JSON.stringify(promocoesJson));
+
+        return promocaoDeletada; // Retorna a promoção deletada
+    }
+
+    return null; // Promoção não encontrada
+}
+
    
 }
 
