@@ -38,6 +38,11 @@ class PromocaoController {
      })
    );
 
+   // Rota para pegar todas às promoções
+   this.router.get(`${this.prefix}/all`, (req: Request, res: Response) =>
+   this.getAllPromocoes(req, res)
+);
+
     // Rota para buscar uma promoção pelo ID
     this.router.get(`${this.prefix}/:id`, (req: Request, res: Response) =>
         this.getPromocaoById(req, res)
@@ -53,10 +58,7 @@ class PromocaoController {
     //     this.deletePromocaoById(req, res)
     // );
 
-    // Rota para pegar todas às promoções
-    this.router.get(`${this.prefix}/all`, (req: Request, res: Response) =>
-        this.getAllPromocoes(req, res)
-    );
+    
  }
 
  private async createPromocao2(req: Request, res: Response) {
