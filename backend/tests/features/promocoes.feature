@@ -129,18 +129,36 @@ Scenario: Atualização de promoção com sucesso Serviço
      And o cupom "JULIOVERNEBLACK" tem campo "tipo" com "Geral"
      And o cupom "JULIOVERNEBLACK" tem campo "validade" com "Usuário com mais de 12 meses no sistema ou mais de 12 compras"
 
-Scenario: Falha na atualização de promoção Serviço
+Scenario: Falha na atualização de promoção por promoção não encontrada Serviço
      Given que o usuário "Naruto" está logado no sistema como "administrador"
      And o sistema possui o cupom "JULIOVERNEBLACK"
      And o cupom "JULIOVERNEBLACK" tem campo "valor" com "60"
      And o cupom "JULIOVERNEBLACK" tem campo "tipo" com "Livro"
      And o cupom "JULIOVERNEBLACK" tem campo "validade" com "usuário com mais de 3 meses no sistema"
-     And está na página "/api/promocoes/" 
-     When uma requisição PUT é enviada para "/api/promocoes/JULIOVERNEBLAK2" enviando os novos dados do cupom
+     When um json é enviado com o corpo contendo novos dados para o cupom de nome "JULIOVERNEBLACK20"
      And o campo "valor" tem "20"
      And o campo "tipo" tem "Geral"
      And o campo "validade" tem "Usuário com mais de 12 meses no sistema ou mais de 12 compras"
+     And uma requisição PUT é enviada para "/api/promocoes/JULIOVERNEBLACK20" enviando os novos dados do cupom
      Then uma mensagem de aviso é enviada "Promoção não encontrada"
+     And o sistema tem armazenado em "Cupons cadastrados" o cupom "JULIOVERNEBLACK"
+     And o cupom "JULIOVERNEBLACK" tem campo "nome" com "JULIOVERNEBLACK"
+     And o cupom "JULIOVERNEBLACK" tem campo "valor" com "60"
+     And o cupom "JULIOVERNEBLACK" tem campo "tipo" com "Livro"
+     And o cupom "JULIOVERNEBLACK" tem campo "validade" com "usuário com mais de 3 meses no sistema"
+
+Scenario: Falha na atualização de promoção por Valor inválido Serviço
+     Given que o usuário "Naruto" está logado no sistema como "administrador"
+     And o sistema possui o cupom "JULIOVERNEBLACK"
+     And o cupom "JULIOVERNEBLACK" tem campo "valor" com "60"
+     And o cupom "JULIOVERNEBLACK" tem campo "tipo" com "Livro"
+     And o cupom "JULIOVERNEBLACK" tem campo "validade" com "usuário com mais de 3 meses no sistema"
+    When um json é enviado com o corpo contendo novos dados para o cupom de nome "JULIOVERNEBLACK"
+     And o campo "valor" tem "90"
+     And o campo "tipo" tem "Geral"
+     And o campo "validade" tem "Usuário com mais de 12 meses no sistema ou mais de 12 compras"
+     And uma requisição PUT é enviada para "/api/promocoes/JULIOVERNEBLACK" enviando os novos dados do cupom
+     Then uma mensagem de aviso é enviada "Valor inválido"
      And o sistema tem armazenado em "Cupons cadastrados" o cupom "JULIOVERNEBLACK"
      And o cupom "JULIOVERNEBLACK" tem campo "nome" com "JULIOVERNEBLACK"
      And o cupom "JULIOVERNEBLACK" tem campo "valor" com "60"
