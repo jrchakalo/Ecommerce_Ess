@@ -60,23 +60,32 @@ public async getAllPromocoes(): Promise<PromocaoModel[]> {
     });
   }
 
-  public async updatePromocaoById(id: string, data: PromocaoEntity): Promise<PromocaoModel> {
-    const promocaoEntity = await this.promocaoRepository.updatePromocaoById(id, data);
+  public async updatePromocaoById(id: string, data: PromocaoEntity): Promise<SuccessResult>  {
 
-    if (!promocaoEntity) {
-      throw new HttpNotFoundError({
-        msg: 'Promocao not found',
-        msgCode: PromocaoServiceMessageCode.promocao_not_found,
-      });
+    let promocao = new PromocaoModel(data);
+    let validacao = this.validaUpdatePromocao(promocao);
+    let promocaoEntity = null;
+
+    //console.log("ValidacaoUpdate: " + validacao);
+    if (validacao.status == 200){
+      let promocaoEntity = await this.promocaoRepository.updatePromocaoById(id, promocao);
+
+      if (!promocaoEntity) {
+        throw new HttpNotFoundError({
+          msg: 'Promoção não encontrada',
+          msgCode: PromocaoServiceMessageCode.promocao_not_found,
+        });
+      }
     }
 
-    const promocaoModel = new PromocaoModel(promocaoEntity);
-
-    return promocaoModel;
+    return new SuccessResult({
+      msg: validacao.msg,
+      data: promocaoEntity,
+      code: validacao.status
+    });
   }
 
   private validaPromocao (promocaoData: PromocaoModel){
-    //const promocaoData = new PromocaoModel(promocao);
     let returnData = {
       status: 400,
       msg: "",
@@ -100,8 +109,6 @@ public async getAllPromocoes(): Promise<PromocaoModel[]> {
         returnData.status = 200;
         returnData.msg ="Cadastro de promoção concluído com sucesso!"
         promocaoData.valor = '10';
-        //response = await request.post('/api/promocoes/cadastro').send(JSON.stringify(promocaoData));
-        //console.log('1 '+ JSON.stringify(response));
   
     } else if(!promocaoData.verificarValor()) {
         returnData.status = 400;
@@ -111,13 +118,44 @@ public async getAllPromocoes(): Promise<PromocaoModel[]> {
     } else {
         returnData.status = 200;
         returnData.msg ="Cadastro de promoção concluído com sucesso!"  ;
-        //response = await request.post('/api/promocoes/cadastro').send(JSON.stringify(promocaoData));
         console.log('2 '+ JSON.stringify(returnData));
     }
 
     return returnData; 
   }
 
+  private validaUpdatePromocao (promocaoData: PromocaoModel){
+
+    let returnData = {
+      status: 400,
+      msg: "",
+      promocao: promocaoData
+    };
+    const verifBranco = promocaoData.verificarBranco(promocaoData);
+
+    if(verifBranco == 1) {
+        returnData.status = 400;
+        returnData.msg = "Campos em branco";
+        console.log('1.2 '+ JSON.stringify(returnData));
+  
+    } else if(verifBranco == 2) {
+        returnData.status = 200;
+        returnData.msg = "As Informações foram atualizadas com sucesso"
+        promocaoData.valor = '10';
+  
+    } else if(!promocaoData.verificarValor()) {
+        returnData.status = 400;
+        returnData.msg = "Valor inválido";
+        console.log('1 '+ JSON.stringify(returnData));
+        
+    } else {
+        returnData.status = 200;
+        returnData.msg = "As Informações foram atualizadas com sucesso";
+        console.log('2 '+ JSON.stringify(returnData));
+    }
+
+    return returnData; 
+  }
 }
 
 export default PromocaoService;

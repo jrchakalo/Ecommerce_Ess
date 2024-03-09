@@ -46,9 +46,32 @@ class PromocaoRepository extends BaseRepository<PromocaoEntity> {
   }
 
   public async updatePromocaoById(id: string, data: PromocaoEntity): Promise<PromocaoEntity | null> {
-    return await this.update((promocao) => promocao.id === id, data);
-  }
+    const promocoesJson = JSON.parse(fs.readFileSync(filePathPromocoes, 'utf-8'));
 
+    // console.log("promocoesJson: " + JSON.stringify(promocoesJson));
+    // console.log("promocoesJson[0].id: " + promocoesJson[1].id);
+    // console.log("id: " + id);
+
+    // Encontra o usuário no array pelo ID
+    const promocaoToUpdate = promocoesJson.find((promocao: PromocaoEntity) => promocao.id === id);
+
+    // console.log("PROMOCAOTOUPDATE: " + JSON.stringify(promocaoToUpdate));
+
+    if (promocaoToUpdate) {
+        // Atualiza os campos da promoção
+        promocaoToUpdate.nome = data.nome ?? promocaoToUpdate.nome;
+        promocaoToUpdate.valor = data.valor ?? promocaoToUpdate.valor;
+        promocaoToUpdate.tipo = data.tipo ?? promocaoToUpdate.tipo;
+        promocaoToUpdate.validade = data.validade ?? promocaoToUpdate.validade;
+
+        // Escreve a lista atualizada de promoções de volta no arquivo JSON
+        fs.writeFileSync(filePathPromocoes, JSON.stringify(promocoesJson));
+
+        return promocaoToUpdate; // Retorna a promoção atualizada
+    }
+    return null; // Promoção não encontrada
+  }
+   
 }
 
 export default PromocaoRepository;

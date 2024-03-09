@@ -40,6 +40,11 @@ class PromocaoController {
         this.updatePromocao(req, res)
     );
 
+    // // Rota para deletar uma promoção pelo ID
+    // this.router.delete(`${this.prefix}/:id`, (req: Request, res: Response) =>
+    //     this.deletePromocaoById(req, res)
+    // );
+
     // Rota para pegar todas às promoções
     this.router.get(`${this.prefix}`, (req: Request, res: Response) =>
         this.getAllPromocoes(req, res)
@@ -90,8 +95,9 @@ class PromocaoController {
     }
     // Retorna a promoção atualizada
     return new SuccessResult({
-        msg: 'As Informações foram atualizadas com sucesso',
-        data: promocao,
+        msg: promocao.msg,
+        data: promocao.data,
+        code: promocao.code
     }).handle(res);
   }
 
