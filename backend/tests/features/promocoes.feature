@@ -129,6 +129,25 @@ Scenario: Atualização de promoção com sucesso Serviço
      And o cupom "JULIOVERNEBLACK" tem campo "tipo" com "Geral"
      And o cupom "JULIOVERNEBLACK" tem campo "validade" com "Usuário com mais de 12 meses no sistema ou mais de 12 compras"
 
+Scenario: Falha na atualização de promoção Serviço
+     Given que o usuário "Naruto" está logado no sistema como "administrador"
+     And o sistema possui o cupom "JULIOVERNEBLACK"
+     And o cupom "JULIOVERNEBLACK" tem campo "valor" com "60"
+     And o cupom "JULIOVERNEBLACK" tem campo "tipo" com "Livro"
+     And o cupom "JULIOVERNEBLACK" tem campo "validade" com "usuário com mais de 3 meses no sistema"
+     And está na página "/api/promocoes/" 
+     When uma requisição PUT é enviada para "/api/promocoes/JULIOVERNEBLAK2" enviando os novos dados do cupom
+     And o campo "valor" tem "20"
+     And o campo "tipo" tem "Geral"
+     And o campo "validade" tem "Usuário com mais de 12 meses no sistema ou mais de 12 compras"
+     Then uma mensagem de aviso é enviada "Promoção não encontrada"
+     And o sistema tem armazenado em "Cupons cadastrados" o cupom "JULIOVERNEBLACK"
+     And o cupom "JULIOVERNEBLACK" tem campo "nome" com "JULIOVERNEBLACK"
+     And o cupom "JULIOVERNEBLACK" tem campo "valor" com "60"
+     And o cupom "JULIOVERNEBLACK" tem campo "tipo" com "Livro"
+     And o cupom "JULIOVERNEBLACK" tem campo "validade" com "usuário com mais de 3 meses no sistema"
+
+
 # Scenario: Atualização de cupom de promoção com sucesso GUI
 #     Given que o usuário "Naruto" está logado no sistema como "administrador"
 #     And e o sistema possui o cupom "JULIOVERNEBLACK" com "Valor" igual a "60", "Tipo" igual a "Livro" e "Condições de validade" igual a "usuário com mais de 3 meses no sistema"
