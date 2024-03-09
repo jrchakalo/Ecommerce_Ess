@@ -165,6 +165,16 @@ Scenario: Falha na atualização de promoção por Valor inválido Serviço
      And o cupom "JULIOVERNEBLACK" tem campo "tipo" com "Livro"
      And o cupom "JULIOVERNEBLACK" tem campo "validade" com "usuário com mais de 3 meses no sistema"
 
+Scenario: Apagar promoção com sucesso Serviço
+     Given que o usuário "Naruto" está logado no sistema como "administrador"
+     And o sistema possui o cupom "JULIOVERNE10"
+     And o sistema possui o cupom "JULIOVERNEBLACK"
+     When uma requisição DELETE é enviada para "/api/promocoes/JULIOVERNEBLACK"
+     Then uma mensagem de aviso é enviada "Promoção removida com sucesso"
+     And o sistema tem armazenado em "Cupons cadastrados" o cupom "JULIOVERNE10"
+     And o sistema não tem armazenado em "Cupons cadastrados" o cupom "JULIOVERNEBLACK"
+
+
 
 # Scenario: Atualização de cupom de promoção com sucesso GUI
 #     Given que o usuário "Naruto" está logado no sistema como "administrador"

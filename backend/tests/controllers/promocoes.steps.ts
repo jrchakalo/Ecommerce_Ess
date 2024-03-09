@@ -432,7 +432,6 @@ defineFeature(feature, (test) => {
 
         and(/^o cupom "(.*)" tem campo "(.*)" com "(.*)"$/, async (id, campo, valor) => {
             promocaoData.preencherCampo(campo, valor);
-            console.log("PROMOCAODATA: " + JSON.stringify(promocaoData));
             promocaoData.salvarPromocao(promocaoData);
         });
 
@@ -457,9 +456,6 @@ defineFeature(feature, (test) => {
         });
 
         then(/^uma mensagem de aviso é enviada "(.*)"$/, async(expectedMessage) => {
-
-            console.log("MENSAGEM: " + response.body.msg);
-
             expect(response.status).toBe(404);
             expect(response.body.msg).toBe(expectedMessage);
         });
@@ -513,7 +509,6 @@ defineFeature(feature, (test) => {
 
         and(/^o cupom "(.*)" tem campo "(.*)" com "(.*)"$/, async (id, campo, valor) => {
             promocaoData.preencherCampo(campo, valor);
-            console.log("PROMOCAODATA: " + JSON.stringify(promocaoData));
             promocaoData.salvarPromocao(promocaoData);
         });
 
@@ -569,6 +564,58 @@ defineFeature(feature, (test) => {
         and(/^o cupom "(.*)" tem campo "(.*)" com "(.*)"$/, async (id,campo,data) => {
             expect(promocaoData.verificarPromocaoByCampo(id,campo,data)).toBe(true);
 
+        });
+    });
+
+    test('Apagar promoção com sucesso Serviço', ({ given, when, then, and }) => {
+        given(/^que o usuário "(.*)" está logado no sistema como "(.*)"$/, async (name,userType ) => {
+            if (!(userType == 'administrador')) {
+                response.status = 400;
+            }
+        });
+
+        and(/^o sistema possui o cupom "(.*)"$/, async (nome) => {
+            const promocao = new PromocaoModel({
+                nome: nome,
+                valor: '10',
+                tipo: 'Geral',
+                validade: 'Usuário com 3 meses ou menos no sistema'
+            });
+            promocao.salvarPromocao(promocao)
+        });
+
+        and(/^o sistema possui o cupom "(.*)"$/, async (nome) => {
+            const promocao = new PromocaoModel({
+                nome: nome,
+                valor: '10',
+                tipo: 'Geral',
+                validade: 'Usuário com 3 meses ou menos no sistema'
+            });
+            promocao.salvarPromocao(promocao)
+        });
+
+        when(/^uma requisição DELETE é enviada para "(.*)"$/, async (rota) => {
+            response = await request.delete(rota).send(promocaoData);
+        });
+
+        then(/^uma mensagem de aviso é enviada "(.*)"$/, async(expectedMessage) => {
+
+            console.log("MENSAGEM: " + response.body.msg);
+
+            expect(response.status).toBe(200);
+            expect(response.body.msg).toBe(expectedMessage);
+        });
+
+        and(/^o sistema tem armazenado em "(.*)" o cupom "(.*)"$/, async (local,nome) => {
+            if (local == 'Cupons cadastrados') {
+                expect(promocaoData.verificarExistente(nome)).toBe(true);
+            }
+        });
+
+        and(/^o sistema não tem armazenado em "(.*)" o cupom "(.*)"$/, async (local,nome) => {
+            if (local == 'Cupons cadastrados') {
+                expect(promocaoData.verificarExistente(nome)).toBe(false);
+            }
         });
     });
 
