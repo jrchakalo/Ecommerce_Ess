@@ -33,14 +33,14 @@ Scenario: Cadastro de promoção com sucesso com campo valor em branco Serviço
     Given que o usuário "Júlio Vierne" está logado no sistema como "administrador"
     And está na página "/api/promocoes/cadastro"
     When preenche o campo "nome" com "JULIOVERNE10"
-    And preenche o campo "tipo" com "Livros"
+    And preenche o campo "tipo" com "Livro"
     And preenche o campo "validade" com "Usuário com mais de 12 meses no sistema ou mais de 12 compras"
     And uma requisição POST for enviada para "/api/promocoes/cadastro" enviando os dados do novo cupom
     Then uma mensagem de confirmação é enviada "Cadastro de promoção concluído com sucesso!"
     And o sistema tem armazenado em "Cupons cadastrados" o cupom "JULIOVERNE10"
     And o cupom "JULIOVERNE10" tem campo "nome" com "JULIOVERNE10"
     And o cupom "JULIOVERNE10" tem campo "valor" com "10"
-    And o cupom "JULIOVERNE10" tem campo "tipo" com "Livros"
+    And o cupom "JULIOVERNE10" tem campo "tipo" com "Livro"
     And o cupom "JULIOVERNE10" tem campo "validade" com "Usuário com mais de 12 meses no sistema ou mais de 12 compras"
 
 
@@ -105,8 +105,52 @@ Scenario: Falha no cadastro de promoção por Nome inválido Serviço
      And o sistema tem armazenado em "Cupons cadastrados" o cupom "JULIOVERNE70"
      And o cupom "JULIOVERNE60" tem campo "nome" com "JULIOVERNE60"
      And o cupom "JULIOVERNE60" tem campo "valor" com "60"
-     And o cupom "JULIOVERNE60" tem campo "tipo" com "Livros"
+     And o cupom "JULIOVERNE60" tem campo "tipo" com "Livro"
      And o cupom "JULIOVERNE60" tem campo "validade" com "Usuário com mais de 12 meses no sistema ou mais de 12 compras" 
+
+Scenario: Atualização de promoção com sucesso Serviço
+     Given que o usuário "Naruto" está logado no sistema como "administrador"
+     And o sistema possui o cupom "JULIOVERNEBLACK"
+    #  And o cupom "JULIOVERNEBLACK" tem campo "nome" com "JULIOVERNEBLACK"
+     And o cupom "JULIOVERNEBLACK" tem campo "valor" com "60"
+     And o cupom "JULIOVERNEBLACK" tem campo "tipo" com "Livro"
+     And o cupom "JULIOVERNEBLACK" tem campo "validade" com "usuário com mais de 3 meses no sistema"
+     And está na página "/api/promocoes/" 
+     When seleciona o cupom "JULIOVERNEBLACK"
+     #And preenche o campo "nome" com "JULIOVERNE20"
+     And preenche o campo "valor" com "20"
+     And preenche o campo "tipo" com "Geral"
+     And preenche o campo "validade" com "Usuário com mais de 12 meses no sistema ou mais de 12 compras"
+     And uma requisição PUT é enviada para "/api/promocoes/JULIOVERNEBLACK" enviando os novos dados do cupom
+     Then uma mensagem de aviso é enviada "As Informações foram atualizadas com sucesso"
+     And o sistema tem armazenado em "Cupons cadastrados" o cupom "JULIOVERNEBLACK"
+     And o cupom "JULIOVERNEBLACK" tem campo "nome" com "JULIOVERNEBLACK"
+     And o cupom "JULIOVERNEBLACK" tem campo "valor" com "20"
+     And o cupom "JULIOVERNEBLACK" tem campo "tipo" com "Geral"
+     And o cupom "JULIOVERNEBLACK" tem campo "validade" com "Usuário com mais de 12 meses no sistema ou mais de 12 compras"
+
+# Scenario: Atualização de cupom de promoção com sucesso GUI
+#     Given que o usuário "Naruto" está logado no sistema como "administrador"
+#     And e o sistema possui o cupom "JULIOVERNEBLACK" com "Valor" igual a "60", "Tipo" igual a "Livro" e "Condições de validade" igual a "usuário com mais de 3 meses no sistema"
+#     And está na página "Cupons cadastrados"
+#     When seleciona o cupom  "JULIOVERNEBLACK"
+#     And atualiza o conteúdo do campo "Valor" com "40"
+#     And seleciona "Atualizar promoção"
+#     Then uma mensagem de confirmação é exibida "Promoção atualizada com sucesso!"
+#     And a página "Cupons cadastrados" é exibida contendo os cupons de promoção cadastrados que inclui o cupom "JULIOVERNEBLACK"
+#     And o cupom "JULIOVERNEBLACK" possui campo "Valor" igual a "40", "Tipo" igual a "Livro" e "Condições de validade" igual a "usuário com mais de 3 meses no sistema"
+
+# Scenario: Remoção do cupom de promoção GUI
+#     Given que o usuário "Viajante" está logado no sistema como "administrador"
+#     And está na página "Cupons cadastrados"
+#     And a página exibe os cupons "JULIOVERNE10", "JULIOVERNE60" e "JULIOVERNE70"
+#     When seleciono o cupom "JULIOVERNE60"
+#     And seleciono "Excluir cupom"
+#     Then uma mensagem de aviso é exibida "Tem certeza que quer excluir este cupom?"
+#     And Seleciono "Sim"
+#     And a página "Cupons cadastrados" é exibida contendo os cupons de promoção cadastrados nessa ordem "JULIOVERNE10" e "JULIOVERNE70" 
+
+
 
 # Scenario: Cadastro de promoção teste de seleção Tipo GUI
 #     Given que o usuário "Naruto" está logado no sistema como "administrador"
