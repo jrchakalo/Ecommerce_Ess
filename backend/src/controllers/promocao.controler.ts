@@ -30,6 +30,14 @@ class PromocaoController {
       })
     );
 
+     //Cria um GET para pagina de Promoções
+     this.router.get(`${this.prefix}`, (req: Request, res: Response) =>
+     res.status(200).send({
+       text: 'PROMOÇÕES CADASTRADAS',
+       msg: 'Promoções Cadastradas'
+     })
+   );
+
     // Rota para buscar uma promoção pelo ID
     this.router.get(`${this.prefix}/:id`, (req: Request, res: Response) =>
         this.getPromocaoById(req, res)
@@ -46,7 +54,7 @@ class PromocaoController {
     // );
 
     // Rota para pegar todas às promoções
-    this.router.get(`${this.prefix}`, (req: Request, res: Response) =>
+    this.router.get(`${this.prefix}/all`, (req: Request, res: Response) =>
         this.getAllPromocoes(req, res)
     );
  }
