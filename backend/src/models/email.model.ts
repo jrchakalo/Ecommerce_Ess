@@ -4,7 +4,7 @@ class EmailModel {
     destinatario: string;
     assunto: string;
     corpoEmail: string;
-    comprovante: string;
+    comprovante?: string;
     isSpam: boolean;
     isDelivered: boolean;
 
@@ -14,7 +14,7 @@ class EmailModel {
       destinatario: string; 
       assunto: string;
       corpoEmail: string;
-      comprovante: string
+      comprovante?: string
       isSpam: boolean;
       isDelivered: boolean;
     }) {

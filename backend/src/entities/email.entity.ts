@@ -4,7 +4,7 @@ export default class EmailEntity {
   destinatario: string;
   assunto: string;
   corpoEmail: string;
-  comprovante: string;
+  comprovante?: string;
   isSpam: boolean;
   isDelivered: boolean;
 
@@ -14,7 +14,7 @@ export default class EmailEntity {
     destinatario: string; 
     assunto: string; 
     corpoEmail: string;
-    comprovante: string;
+    comprovante?: string;
     isSpam: boolean;
     isDelivered: boolean;
   }) {
