@@ -6,24 +6,33 @@ const emailJsonPath = './src/models/emails.json';
 
 class EmailRepository extends BaseRepository<EmailEntity> {
   constructor() {
-    super('users'); // Define o prefixo para usuários
+    super('users');
   }
 
-/*  public async sendEmails(data: EmailEntity): Promise<EmailModel> {
+  public async sendEmails(data: EmailEntity): Promise<EmailEntity> {
+    if(!fs.existsSync(emailJsonPath)){
+      fs.writeFileSync(emailJsonPath, '[]');
+    }
+    const emailJson = JSON.parse(fs.readFileSync(emailJsonPath, 'utf-8'));
 
-    const emailEntity = await this.emailRepository.sendEmails(data);
-    const emailModel = new EmailModel(emailEntity);
+    const addData = [...emailJson, data];
 
-    return emailModel;
+    fs.writeFileSync(emailJsonPath, JSON.stringify(addData));
+
+    return data;
   }
 
-  public async checkEmailDeliverySuccess(id: string): Promise<EmailModel | null> {
+  public async checkEmailDeliverySuccess(id: string): Promise<EmailEntity | null> {
     // Verificar se o e-mail foi entregue
+    const emailJson = JSON.parse(fs.readFileSync(emailJsonPath, 'utf-8'));
 
-    const emailEntity = await this.emailRepository.checkEmailDeliverySuccess(id);
-    const emailModel = emailEntity ? new EmailModel(emailEntity) : null;
-
-    return emailModel;
+      for (let index = 0; index < emailJson.length; index++) {
+        if (emailJson[index].id === id) {
+          return emailJson[index];
+        }
+      }
+    
+    return null;
   }
 
   public async checkEmailInSpamFolder(id: string): Promise<boolean> {
@@ -36,37 +45,24 @@ class EmailRepository extends BaseRepository<EmailEntity> {
         throw new Error(`Email com o ID: ${id} não encontrado`);
     }
 
-    return !email.isDelivered;
+    return !email.isSpam;
 }
 
-  public async sendEmailWithoutReceipt(data: EmailEntity): Promise<EmailModel> {
-    const emailEntity = await this.emailRepository.sendEmailWithoutReceipt(data);
-    const emailModel = new EmailModel(emailEntity);
-
-    return emailModel;
-  }
-
   public async getAllEmails(): Promise<EmailModel[]> {
-    const emailEntity = await this.emailRepository.getAllEmails();
-    const emailModel: EmailModel[] = [];
-      
-    let i = 0;
-    const totalEmails = emailEntity.length;
-  
-      for (i = 0; i < totalEmails; i++) {
-          const email = new EmailModel(emailEntity[i]);
-          emailModel[i] = email;
-      }
-  
-      return emailModel;
+    const emailsJson = JSON.parse(fs.readFileSync(emailJsonPath, 'utf-8'));
+
+    return emailsJson;
   }
 
-  public async getSpamEmails(): Promise<EmailModel[]> {
-    const spamEmailEntities = await this.emailRepository.getSpamEmails();
-    const spamEmailModels: EmailModel[] = spamEmailEntities.map((emailEntity: EmailEntity) => new EmailModel(emailEntity));
+  public async getAllSpamEmails(): Promise<EmailModel[]> {
+    const emailsJson = JSON.parse(fs.readFileSync(emailJsonPath, 'utf-8'));
 
-    return spamEmailModels;
-  }*/
+    // Filtrar apenas os emails marcados como spam
+    const spamEmails = emailsJson.filter((email: EmailModel) => email.isSpam);
+
+    return spamEmails;
+}
+
 }
 
 export default EmailRepository;

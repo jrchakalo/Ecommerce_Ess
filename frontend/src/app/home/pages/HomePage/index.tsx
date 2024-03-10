@@ -31,6 +31,9 @@ const HomePage = () => {
             <Link to={`/logout/${state.userId}`} className={styles.linkButton} onClick={handleLogout}>
               Logout
             </Link>
+            <Link to={`/emails/}`} className={styles.linkButton}>
+              E-mail
+            </Link>
           </>
         ) : (
           <>
