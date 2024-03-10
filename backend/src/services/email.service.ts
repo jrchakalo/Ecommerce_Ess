@@ -11,9 +11,9 @@ class EmailService {
     this.emailRepository = emailRepository;
   }
 
-  public async sendEmailWithReceipt(data: EmailEntity): Promise<EmailModel> {
+  public async sendEmails(data: EmailEntity): Promise<EmailModel> {
 
-    const emailEntity = await this.emailRepository.sendEmailWithReceipt(data);
+    const emailEntity = await this.emailRepository.sendEmails(data);
     const emailModel = new EmailModel(emailEntity);
 
     return emailModel;
@@ -41,21 +41,34 @@ class EmailService {
     return !email.isDelivered;
 }
 
-  public async withoutReceipt(id: string): Promise<string> {
-    // Lidar com casos em que o e-mail está sem o comprovante
-    const emailJson = JSON.parse(fs.readFileSync(emailJsonPath, 'utf-8'));
+  public async sendEmailWithoutReceipt(data: EmailEntity): Promise<EmailModel> {
+    const emailEntity = await this.emailRepository.sendEmailWithoutReceipt(data);
+    const emailModel = new EmailModel(emailEntity);
 
-    const email = emailJson.find((email: any) => email.id === id);
+    return emailModel;
+  }
 
-    if (!email) {
-      throw new Error(`Email com o ID: ${id} não encontrado`);
-    }
+  public async getAllEmails(): Promise<EmailModel[]> {
+    const emailEntity = await this.emailRepository.getAllEmails();
+    const emailModel: EmailModel[] = [];
+      
+    let i = 0;
+    const totalEmails = emailEntity.length;
+  
+      for (i = 0; i < totalEmails; i++) {
+          const email = new EmailModel(emailEntity[i]);
+          emailModel[i] = email;
+      }
+  
+      return emailModel;
+  }
 
-    if (email.comprovante) {
-      return `O Email com o ID: ${id} possui comprovante`;
-    } else {
-      return `O Email com o ID: ${id} não possui comprovante`;
-    }}
+  public async getSpamEmails(): Promise<EmailModel[]> {
+    const spamEmailEntities = await this.emailRepository.getSpamEmails();
+    const spamEmailModels: EmailModel[] = spamEmailEntities.map((emailEntity: EmailEntity) => new EmailModel(emailEntity));
+
+    return spamEmailModels;
+  }
 }
 
 export default EmailService;

@@ -7,7 +7,9 @@ const Provider = ({ children }: { children: ReactNode }) => {
   return (
     <LoginProvider>
       <UserProvider>
-        <HomeProvider>{children}</HomeProvider>
+        <EmailProvider>
+          <HomeProvider>{children}</HomeProvider>
+        </EmailProvider>
       </UserProvider>
     </LoginProvider>
   );
