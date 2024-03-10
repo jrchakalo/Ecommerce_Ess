@@ -13,8 +13,7 @@ Scenario: E-mail foi para caixa de spam
     Given Estou na caixa de entrada do e-mail
     And Visualizo que o e-mail com o comprovante não está na caixa de entrada do e-mail
     When Abro aba de e-mails marcados como Spam
-    Then Vou para a pasta de Spam
-    And Visualizo que o e-mail está lá
+    Then Visualizo que o e-mail está lá
     When Abro o e-mail com o comprovante do pedido
     Then Consigo visualizar o comprovante com as informações do meu pedido
 
