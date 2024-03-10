@@ -1,4 +1,5 @@
 import images from "../../../../shared/assets/imagesEmail";
+import { useContext, useEffect} from "react";
 import { Link } from "react-router-dom";
 import styles from "./index.module.css";
 import { Grid } from '@mui/material';
@@ -6,8 +7,16 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import AppBar from '@mui/material/AppBar';
 import IconButton from '@mui/material/IconButton';
+import { EmailContext } from "../../context/EmailContext";
 
 const EmailPage = () => {
+
+  const { service, state } = useContext(EmailContext);
+
+  useEffect(() => {
+    service.getAllEmails();
+  }, [service]);
+
   return(
     <section className={styles.container}>
 
@@ -70,6 +79,34 @@ const EmailPage = () => {
         </AppBar>
       </Box>
     </Grid>
+
+    {/* Emails */}
+
+    <div style={{ marginLeft: "5.7vw", width: '75vw' }}>
+      <h1 className={styles.title}>Lista de Emails</h1>
+        <div className={styles.listContainer}>
+          {state.getEmailRequestStatus.maybeMap({
+            loading: () => <span>Carregando...</span>,
+            failed: () => <span>Erro ao carregar Emails!</span>,
+            succeeded: (emails) => (
+              <>
+                {emails.map((email) => {
+                  return (
+                    <div key={email.id} className={styles.listItem}>
+                      <span
+                        data-cy={`user-item-${email.name}`}
+                        className={styles.listItemText}
+                      >
+                        {email.name}
+                      </span>
+                    </div>
+                  );
+                })}
+              </>
+            ),
+          })}
+        </div>
+      </div>
     
     {/* Final da Pagina */}
     <h6 style={{fontWeight:"400",marginLeft:"28vw",fontSize:"1vw", color: "#000000"}}>Termos · Privacidade · Políticas do Programa</h6>
