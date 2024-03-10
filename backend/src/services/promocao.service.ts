@@ -121,7 +121,7 @@ public async getAllPromocoes(): Promise<PromocaoModel[]> {
   
     } else if(verifBranco == 1) {
         returnData.status = 400;
-        returnData.msg = "Campos em branco";
+        returnData.msg = "Campo(s) em branco";
         console.log('1.2 '+ JSON.stringify(returnData));
   
     } else if(verifBranco == 2) {
@@ -154,7 +154,7 @@ public async getAllPromocoes(): Promise<PromocaoModel[]> {
 
     if(verifBranco == 1) {
         returnData.status = 400;
-        returnData.msg = "Campos em branco";
+        returnData.msg = "Campo(s) em branco";
         console.log('1.2 '+ JSON.stringify(returnData));
   
     } else if(verifBranco == 2) {
