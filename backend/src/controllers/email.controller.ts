@@ -11,7 +11,7 @@ class EmailController {
   private emailService: EmailService;
   private idCount: number = 1;
 
-  constructor(router: Router, emailService: EmailService) {
+  /*constructor(router: Router, emailService: EmailService) {
     this.router = router;
     this.emailService = emailService;
     this.initRoutes();
@@ -160,7 +160,7 @@ class EmailController {
     
     this.idCount = parseInt(id) + 1;
     return this.idCount.toString();
-  }
+  }*/
 }
 
 export default EmailController;
