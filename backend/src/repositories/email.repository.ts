@@ -1,17 +1,15 @@
 import EmailEntity from '../entities/email.entity';
 import EmailModel from '../models/email.model';
-import EmailRepository from '../repositories/email.repository';
 import fs from 'fs';
+import BaseRepository from './base.repository';
 const emailJsonPath = './src/models/emails.json';
 
-class EmailService {
-  private emailRepository: EmailRepository;
-
-  constructor(emailRepository: EmailRepository) {
-    this.emailRepository = emailRepository;
+class EmailRepository extends BaseRepository<EmailEntity> {
+  constructor() {
+    super('users'); // Define o prefixo para usuários
   }
 
-  public async sendEmails(data: EmailEntity): Promise<EmailModel> {
+/*  public async sendEmails(data: EmailEntity): Promise<EmailModel> {
 
     const emailEntity = await this.emailRepository.sendEmails(data);
     const emailModel = new EmailModel(emailEntity);
@@ -68,7 +66,7 @@ class EmailService {
     const spamEmailModels: EmailModel[] = spamEmailEntities.map((emailEntity: EmailEntity) => new EmailModel(emailEntity));
 
     return spamEmailModels;
-  }
+  }*/
 }
 
-export default EmailService;
+export default EmailRepository;

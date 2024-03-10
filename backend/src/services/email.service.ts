@@ -11,7 +11,7 @@ class EmailService {
     this.emailRepository = emailRepository;
   }
 
-  public async sendEmails(data: EmailEntity): Promise<EmailModel> {
+  /*public async sendEmails(data: EmailEntity): Promise<EmailModel> {
 
     const emailEntity = await this.emailRepository.sendEmails(data);
     const emailModel = new EmailModel(emailEntity);
@@ -68,7 +68,7 @@ class EmailService {
     const spamEmailModels: EmailModel[] = spamEmailEntities.map((emailEntity: EmailEntity) => new EmailModel(emailEntity));
 
     return spamEmailModels;
-  }
+  }*/
 }
 
 export default EmailService;
