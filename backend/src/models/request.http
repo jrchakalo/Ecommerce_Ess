@@ -1,20 +1,43 @@
+
 POST http://localhost:5001/api/users/cadastro
 Content-Type: application/json
 
 {
-    "nome": "João Silva",
-    "cpf": "123.456.789-01",
-    "dataNascimento": "25/10/2000",
-    "email": "joao@example.com",
-    "login": "joaosilva",
-    "senha": "senha_segura123",
-    "logado": false
+    "nome": "Airton Garcia",
+    "cpf": "13222020342",
+    "dataNascimento": "30/11/1978",
+    "email": "airton@example.com",
+    "login": "airtongarcia2",
+    "senha": "senhaairton567"
 }
 
 ###
-PUT http://localhost:5001/api/users/joaosilva
+
+POST http://localhost:5001/api/emails/enviarEmail
 Content-Type: application/json
 
 {
-    "senha": "nova_senha123"
+    "remetente": "Júnior",
+    "destinatario": "Rafael",
+    "assunto": "É os guri!",
+    "corpoEmail": "Bah tchê, é os guri!",
+    "comprovante": "aloha",
+    "isSpam": "false",
+    "isDelivered": "false"
+}
+
+###
+POST http://localhost:5001/api/login
+Content-Type: application/json
+
+{
+    "login": "olak",
+    "senha": "senha123"
+}
+
+### 
+POST http://localhost:5001/api/login/logout/2
+Content-Type: application/json
+
+{
 }
