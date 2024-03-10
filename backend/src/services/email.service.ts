@@ -11,9 +11,9 @@ class EmailService {
     this.emailRepository = emailRepository;
   }
 
-  public async sendEmailWithReceipt(data: EmailEntity): Promise<EmailModel> {
+  public async sendEmails(data: EmailEntity): Promise<EmailModel> {
 
-    const emailEntity = await this.emailRepository.sendEmailWithReceipt(data);
+    const emailEntity = await this.emailRepository.sendEmails(data);
     const emailModel = new EmailModel(emailEntity);
 
     return emailModel;
@@ -41,21 +41,27 @@ class EmailService {
     return !email.isDelivered;
 }
 
-  public async withoutReceipt(id: string): Promise<string> {
-    // Lidar com casos em que o e-mail está sem o comprovante
-    const emailJson = JSON.parse(fs.readFileSync(emailJsonPath, 'utf-8'));
+  public async getAllEmails(): Promise<EmailModel[]> {
+    const emailEntity = await this.emailRepository.getAllEmails();
+    const emailModel: EmailModel[] = [];
+      
+    let i = 0;
+    const totalEmails = emailEntity.length;
+  
+      for (i = 0; i < totalEmails; i++) {
+          const email = new EmailModel(emailEntity[i]);
+          emailModel[i] = email;
+      }
+  
+      return emailModel;
+  }
 
-    const email = emailJson.find((email: any) => email.id === id);
+  public async getAllSpamEmails(): Promise<EmailModel[]> {
+    const spamEmailEntities = await this.emailRepository.getAllSpamEmails();
+    const spamEmailModels: EmailModel[] = spamEmailEntities.map((emailEntity: EmailEntity) => new EmailModel(emailEntity));
 
-    if (!email) {
-      throw new Error(`Email com o ID: ${id} não encontrado`);
-    }
-
-    if (email.comprovante) {
-      return `O Email com o ID: ${id} possui comprovante`;
-    } else {
-      return `O Email com o ID: ${id} não possui comprovante`;
-    }}
+    return spamEmailModels;
+  }
 }
 
 export default EmailService;

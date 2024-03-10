@@ -3,6 +3,7 @@
     "jest-cucumber": "^3.0.1"
   },
   "dependencies": {
+    "react": "^18.2.0",
     "supertest": "^6.3.4"
   }
 }

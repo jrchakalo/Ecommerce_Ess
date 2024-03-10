@@ -2,10 +2,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import CreateUser from "./app/home/pages/CreateUser";
 import UpdateUser from "./app/home/pages/UpdateUser";
 import HomePage from "./app/home/pages/HomePage";
-import UserProfile from "./app/home/pages/UserProfile";
+import EmailsPage from "./app/home/pages/ListEmails";
+import EmailsSpam from "./app/home/pages/ListEmailsSpam";
 import Login from "./app/home/pages/Login";
+import UserProfile from "./app/home/pages/UserProfile";
 import Logout from "./app/home/pages/Logout";
 import ProductPage from "./app/home/pages/ProductPage";
+import Carrinho from "./app/home/pages/Carrinho";
 
 const router = createBrowserRouter([
   {
@@ -25,12 +28,20 @@ const router = createBrowserRouter([
     Component: UpdateUser,
   },
   {
-    path: "/profile/:id",
-    Component: UserProfile
+    path: "/emails",
+    Component: EmailsPage,
+  },
+  {
+    path: "/emailsSpam",
+    Component: EmailsSpam,
   },
   {
     path: "/login",
-    Component: Login
+    Component: Login,
+  },
+  {
+    path: "/profile/:id",
+    Component: UserProfile
   },
   {
     path: "/logout/:id",
@@ -39,6 +50,10 @@ const router = createBrowserRouter([
   {
     path: "/product/:id",
     Component: ProductPage
+  },
+  {
+    path: "/cart/:id",
+    Component: Carrinho
   }
 ]);
 

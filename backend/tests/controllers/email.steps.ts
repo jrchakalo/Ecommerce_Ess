@@ -9,6 +9,7 @@ const request = supertest(app);
 
 defineFeature(feature, (test) => {
   let caixaDeEntrada: { empresa: string; assunto: string; conteudo: string; }[] = [];
+  let caixaDeSpam: { empresa: string; assunto: string; conteudo: string; }[] = [];
   let mockEmailRepository: EmailRepository;
   let response: supertest.Response;
 
@@ -55,29 +56,23 @@ defineFeature(feature, (test) => {
   
       when('Abro aba de e-mails marcados como Spam', async () => {
         // Implementação simulada para abrir a aba de e-mails marcados como Spam
-        response = await request.get(`/spam`);
+        caixaDeSpam = [];
       });
   
-      then('Vou para a pasta de Spam', async () => {
-        // Implementação simulada para ir para a pasta de Spam
-        response = await request.get(`/spam`);
-      });
-  
-      and('Visualizo que o e-mail está lá', () => {
+      then('Visualizo que o e-mail está lá', () => {
         // Implementação simulada para verificar se o e-mail está na pasta de Spam
         const emailComComprovante = {
           empresa: "LivrariaJulioVerne@gmail.com",
           assunto: "Comprovante do Pedido",
           conteudo: "Aqui está o comprovante do seu pedido",
         };
-        caixaDeEntrada.push(emailComComprovante);
+        caixaDeSpam.push(emailComComprovante);
       });
   
       when('Abro o e-mail com o comprovante do pedido', async () => {
         // Implementação simulada para abrir o e-mail com o comprovante do pedido
-        response = await request.post(`/api/emails/enviarEmail`).send(caixaDeEntrada[0]);
+        response = await request.post(`/api/emails/enviarEmail`).send(caixaDeSpam[0]);
       });
-
   
       then('Consigo visualizar o comprovante com as informações do meu pedido', () => {
         // Implementação simulada para verificar se o comprovante com as informações do pedido está presente no e-mail

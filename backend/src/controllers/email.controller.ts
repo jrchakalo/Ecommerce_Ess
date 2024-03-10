@@ -19,7 +19,7 @@ class EmailController {
 
   private initRoutes() {
     this.router.post(`${this.prefix}/enviarEmail`, (req: Request, res: Response) =>
-      this.sendEmailWithReceipt(req, res));
+      this.sendEmails(req, res));
 
     this.router.get(`${this.prefix}/emailEnviado/:id`, (req: Request, res: Response) =>
       this.checkEmailDeliverySuccess(req, res));
@@ -27,15 +27,18 @@ class EmailController {
     this.router.get(`${this.prefix}/spam/:id`, (req: Request, res: Response) =>
       this.checkEmailInSpamFolder(req, res));
 
-    this.router.get(`${this.prefix}/semComprovante/:id`, (req: Request, res: Response) =>
-      this.withoutReceipt(req, res));
+    this.router.get(this.prefix, (req: Request, res: Response) =>
+      this.getAllEmails(req, res));
+
+    this.router.get(this.prefix, (req: Request, res: Response) =>
+      this.getAllSpamEmails(req, res));
   }
 
-  private async sendEmailWithReceipt(req: Request, res: Response) {
+  private async sendEmails(req: Request, res: Response) {
     req.body.id = this.generateId();
   
     // Enviar e-mail com os dados fornecidos
-    const email = await this.emailService.sendEmailWithReceipt(new EmailEntity(req.body));
+    const email = await this.emailService.sendEmails(new EmailEntity(req.body));
 
     return new SuccessResult({
       msg: 'E-mail enviado com sucesso',
@@ -90,23 +93,43 @@ class EmailController {
     }).handle(res);
   }
 
-  private async withoutReceipt(req: Request, res: Response) {
-    const id = req.params.id;
+  private async getAllEmails(req: Request, res: Response) {
+    // Busca todos os usuários
+    const emails = await this.emailService.getAllEmails();
 
-    const checkEmail = await this.emailService.withoutReceipt(id);
- 
-    if (!checkEmail) {
-      return new SuccessResult({
-        msg: 'E-mail está com comprovante',
-        data: null,
-        msgCode: 'email_with_receipt',
-        code: 404
-      }).handle(res);
+    if (!emails) {
+        // Retorna um erro caso não haja usuários
+        return new SuccessResult({
+            msg: 'Nenhum email encontrado',
+            data: null,
+            msgCode: 'emails_not_found',
+            code: 404
+        }).handle(res);
+    } 
+    // Retorna todos os usuários
+    return new SuccessResult({
+        msg: 'Todos os Emails',
+        data: emails,
+    }).handle(res);
   }
 
+  private async getAllSpamEmails(req: Request, res: Response) {
+    // Busca todos os usuários
+    const emailsSpam = await this.emailService.getAllSpamEmails();
+
+    if (!emailsSpam) {
+        // Retorna um erro caso não haja usuários
+        return new SuccessResult({
+            msg: 'Nenhum email marcado como spam encontrado',
+            data: null,
+            msgCode: 'spamEmails_not_found',
+            code: 404
+        }).handle(res);
+    } 
+    // Retorna todos os usuários
     return new SuccessResult({
-      msg: 'E-mail está sem o comprovante',
-      data: checkEmail
+        msg: 'Todos os Emails marcados como Spam',
+        data: emailsSpam,
     }).handle(res);
   }
 

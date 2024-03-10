@@ -31,13 +31,17 @@ POST http://localhost:5001/api/login
 Content-Type: application/json
 
 {
-    "login": "olak",
+    "login": "jrchakalo",
     "senha": "senha123"
 }
 
 ### 
-POST http://localhost:5001/api/login/logout/2
+GET http://localhost:5001/api/cart/getProducts
 Content-Type: application/json
 
 {
+    "id": "1"
 }
+
+### 
+GET http://localhost:5001/api/cart/1

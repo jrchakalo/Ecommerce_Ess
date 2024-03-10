@@ -1,77 +1,90 @@
 import { defineFeature, loadFeature } from 'jest-cucumber';
 import app from '../../src/app';
-import request from 'supertest';
+import supertest from 'supertest';
+import { di } from '../../src/di';
+import LoginRepository from '../../src/repositories/login.repository';
+import LoginService from '../../src/services/login.service';
+import UserService from '../../src/services/user.service';
+import UserModel from '../../src/models/user.model';
+import { mock } from 'node:test';
 import fs from 'fs';
+import LoginEntity from '../../src/entities/login.entity';
+import exp from 'constants';
 
 const feature = loadFeature('./tests/features/login.feature');
+const request = supertest(app);
 
 defineFeature(feature, (test) => {
-  let response: any; // Variável para armazenar a resposta da solicitação HTTP
+  let mockLoginRepository: LoginRepository;
+  let response: supertest.Response;
+  const loginRepository = new LoginRepository();
+  const mockUserTest = new UserModel({
+    id: '1',
+    nome: 'Júnior',
+    cpf: '11111111111',
+    dataNascimento: '09/09/2003',
+    email: 'jisj@cin.ufpe.br',
+    login: 'jrchakalo',
+    senha: 'senha123',
+    logado: false
+  });
 
-  test('Login com sucesso', ({ given, when, then }) => {
-    given(/^I am a registered user with email "([^"]*)" and password "([^"]*)"$/, async (email: string, password: string) => {
-      // Adicionar o usuário no banco de dados fictício
-      const users = JSON.parse(fs.readFileSync('./src/models/testUsers.json', 'utf8'));
-      users.push({ email, password });
-      fs.writeFileSync('./src/models/testUsers.json', JSON.stringify(users));
+  beforeEach(() => {
+    mockLoginRepository = di.getRepository<LoginRepository>(LoginRepository);
+    fs.writeFileSync('./src/models/users.json', JSON.stringify([]));
+  });
+
+  test('Login com sucesso', ({ given, when, then , and }) => {
+    given(/^que eu tenho um usuário cadastrado com o login "(.*)" com a senha "(.*)"$/, async (login, senha) => {
+      response = await request.post('/api/users/cadastro').send(mockUserTest);
     });
 
-    when(/^I log in with email "([^"]*)" and password "([^"]*)"$/, async (email: string, password: string) => {
-      // Realizar uma solicitação HTTP para a rota de login
-      response = await request(app)
-        .post('/login')
-        .send({ email, password });
+    when(/^eu realizo um post para o endpoint "(.*)" com os dados "(.*)" e "(.*)"$/, async (endpoint, login, senha) => {
+      response = await request.post(endpoint).send(new LoginEntity({ login, senha }));
     });
 
-    then(/^I should be logged in successfully$/, async () => {
-      // Verificar se a resposta da solicitação HTTP indica que o login foi bem-sucedido
+    then(/^devo receber o status 200$/, () => {
       expect(response.status).toBe(200);
-      expect(response.body.message).toBe('Login bem-sucedido.');
+    });
+
+    and(/^uma mensagem "(.*)"$/, async (mensagem) => {
+      expect(response.body.msg).toBe(mensagem);
     });
   });
 
-  test('Login com email inválido', ({ given, when, then }) => {
-    let errorMessage: string; // Variável para armazenar a mensagem de erro
-
-    given(/^there is no user registered with email "([^"]*)"$/, async (email: string) => {
-      // Não é necessário adicionar nenhum usuário fictício aqui, pois queremos simular o cenário de usuário não encontrado
+  test('Login com falha por usuario não encontrado', ({ given, when, then, and }) => {
+    given(/^que eu tenho um usuário cadastrado com o login "(.*)" com a senha "(.*)"$/, async (login, senha) => {
+      response = await request.post('/api/users/cadastro').send(mockUserTest);
     });
 
-    when(/^I log in with email "([^"]*)" and password "([^"]*)"$/, async (email: string, password: string) => {
-      // Realizar uma solicitação HTTP para a rota de login
-      response = await request(app)
-        .post('/login')
-        .send({ email, password });
+    when(/^eu realizo um post para o endpoint "(.*)" com os dados "(.*)" e "(.*)"$/, async (endpoint, login, senha) => {
+      response = await request.post(endpoint).send(new LoginEntity({ login, senha }));
     });
 
-    then(/^I should receive an error message saying "([^"]*)"$/, async (expectedErrorMessage: string) => {
-      // Verificar se a resposta da solicitação HTTP indica que ocorreu um erro e se a mensagem de erro está correta
-      expect(response.status).toBe(404);
-      expect(response.body.message).toBe(expectedErrorMessage);
+    then(/^devo receber o status 400$/, () => {
+      expect(response.status).toBe(400);
+    });
+
+    and(/^uma mensagem "(.*)"$/, (mensagem) => {
+      expect(response.body.msg).toBe(mensagem);
     });
   });
 
-  test('Login com senha inválida', ({ given, when, then }) => {
-    let errorMessage: string; // Variável para armazenar a mensagem de erro
-
-    given(/^I am a registered user with email "([^"]*)" and password "([^"]*)"$/, async (email: string, password: string) => {
-      // Adicionar o usuário no banco de dados fictício
-      const users = JSON.parse(fs.readFileSync('./src/models/testUsers.json', 'utf8'));
-      users.push({ email, password });
-      fs.writeFileSync('./src/models/testUsers.json', JSON.stringify(users));
+  test('Login com falha por senha incorreta', ({ given, when, then, and }) => {
+    given(/^que eu tenho um usuário cadastrado com o login "(.*)" com a senha "(.*)"$/, async (login, senha) => {
+      response = await request.post('/api/users/cadastro').send(mockUserTest);
     });
 
-    when(/^I log in with email "([^"]*)" and password "([^"]*)"$/, async (email: string, password: string) => {
-      // Realizar uma solicitação HTTP para a rota de login
-      response = await request(app)
-        .post('/login')
-        .send({ email, password });
+    when(/^eu realizo um post para o endpoint "(.*)" com os dados "(.*)" e "(.*)"$/, async (endpoint, login, senha) => {
+      response = await request.post(endpoint).send(new LoginEntity({ login, senha }));
     });
 
-    then(/^I should receive an error message saying "([^"]*)"$/, async (expectedErrorMessage: string) => {
-      // Verificar se a resposta da solicitação HTTP indica que ocorreu um erro e se a mensagem de erro está correta
-      expect(response.status).toBe(401);
-      expect(response.body.message).toBe(expectedErrorMessage);
+    then(/^devo receber o status 400$/, () => {
+      expect(response.status).toBe(400);
+    });
+
+    and(/^uma mensagem "(.*)"$/, (mensagem) => {
+      expect(response.body.msg).toBe(mensagem);
     });
   });
 });
