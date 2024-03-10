@@ -43,48 +43,12 @@ class PromocaoModel {
     // salvarPromocao(promocaoData: PromocaoModel){
     //     fs.writeFileSync(filePathPromocoes, JSON.stringify(promocaoData));
     // }
-    deletarPromocoes(){
-        // // Escreve uma string vazia no arquivo
-        // fs.writeFile(filePathPromocoes, '', (err) => {
-        //     if (err) {
-        //     console.error('Erro ao limpar o conteúdo do arquivo:', err);
-        //     return;
-        //     }
-        //     console.log('Conteúdo do arquivo foi limpo com sucesso!');
-        // });
-
-        if (fs.existsSync(filePathPromocoes)) {
-            fs.unlinkSync(filePathPromocoes);//delete promocoes.json
-            const promocoesInit = new PromocaoModel({
-                nome: '',
-                valor: '',
-                tipo: '',
-                validade: ''
-            });
-            this.salvarPromocao(promocoesInit);
-        }
-    }
-
-    salvarPromocao(promocaoData: PromocaoModel) {
-        // Carrega os dados existentes do arquivo JSON, se existirem
-        let promocoesJson: PromocaoModel[] = [];
-        if (fs.existsSync(filePathPromocoes)) {
-            const data = fs.readFileSync(filePathPromocoes, 'utf-8');
-            promocoesJson = JSON.parse(data);
-        }
-
-        // Adiciona a nova promoção aos dados existentes
-        promocoesJson.push(promocaoData);
-
-        // Escreve os dados atualizados no arquivo JSON
-        fs.writeFileSync(filePathPromocoes, JSON.stringify(promocoesJson));
-    }
 
     verificarExistente(data: string): boolean {
 
         try {
             fs.readFileSync(filePathPromocoes, 'utf-8');
-            // console.log('Conteúdo do arquivo foi lido com sucesso!');
+            // //console.log('Conteúdo do arquivo foi lido com sucesso!');
             let promocoesJson = JSON.parse(fs.readFileSync(filePathPromocoes, 'utf-8'));
 
             if (promocoesJson && Array.isArray(promocoesJson)) {
@@ -93,7 +57,7 @@ class PromocaoModel {
                         return true;
                     }
                 }
-                // console.log('Conteúdo do arquivo foi lido com sucesso2!');
+                // //console.log('Conteúdo do arquivo foi lido com sucesso2!');
             }
         } catch (err) {
             console.error('Erro ao ler o conteúdo do arquivo:', err);
@@ -103,8 +67,7 @@ class PromocaoModel {
         return false;
     }
 
-    
-    verificarPromocao(idPromocao: string, campo: string, data: string): boolean {
+    verificarPromocaoByCampo(idPromocao: string, campo: string, data: string): boolean {
         let promocoesJson = JSON.parse(fs.readFileSync(filePathPromocoes, 'utf-8'));
         
         if (promocoesJson && Array.isArray(promocoesJson)) {
@@ -164,6 +127,44 @@ class PromocaoModel {
             }
     
         return true; // Se valor for um número de 10 a 70, retornar true
+    }
+
+ //Essas funções são usadas para limpar o banco de dados antes de cada teste
+    deletarPromocoes(){
+        // // Escreve uma string vazia no arquivo
+        // fs.writeFile(filePathPromocoes, '', (err) => {
+        //     if (err) {
+        //     console.error('Erro ao limpar o conteúdo do arquivo:', err);
+        //     return;
+        //     }
+        //     //console.log('Conteúdo do arquivo foi limpo com sucesso!');
+        // });
+
+        if (fs.existsSync(filePathPromocoes)) {
+            fs.unlinkSync(filePathPromocoes);//delete promocoes.json
+            const promocoesInit = new PromocaoModel({
+                nome: '',
+                valor: '',
+                tipo: '',
+                validade: ''
+            });
+            this.salvarPromocao(promocoesInit);
+        }
+    }
+
+    salvarPromocao(promocaoData: PromocaoModel) {
+        // Carrega os dados existentes do arquivo JSON, se existirem
+        let promocoesJson: PromocaoModel[] = [];
+        if (fs.existsSync(filePathPromocoes)) {
+            const data = fs.readFileSync(filePathPromocoes, 'utf-8');
+            promocoesJson = JSON.parse(data);
+        }
+
+        // Adiciona a nova promoção aos dados existentes
+        promocoesJson.push(promocaoData);
+
+        // Escreve os dados atualizados no arquivo JSON
+        fs.writeFileSync(filePathPromocoes, JSON.stringify(promocoesJson));
     }
 
 }
