@@ -1,12 +1,12 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import CreateTest from "./app/home/pages/CreateTest";
-import ListTests from "./app/home/pages/ListTests";
 import CreateUser from "./app/home/pages/CreateUser";
-import ListUsers from "./app/home/pages/ListUsers";
 import UpdateUser from "./app/home/pages/UpdateUser";
 import HomePage from "./app/home/pages/HomePage";
 import EmailsPage from "./app/home/pages/ListEmails";
 import EmailsSpam from "./app/home/pages/ListEmailsSpam";
+import Login from "./app/home/pages/Login";
+import UserProfile from "./app/home/pages/UserProfile";
+import Logout from "./app/home/pages/Logout";
 
 const router = createBrowserRouter([
   {
@@ -18,20 +18,8 @@ const router = createBrowserRouter([
     Component: HomePage,
   },
   {
-    path: "/create-test",
-    Component: CreateTest,
-  },
-  {
-    path: "/tests",
-    Component: ListTests,
-  },
-  {
     path: "/create-user",
     Component: CreateUser,
-  },
-  {
-    path: "/users",
-    Component: ListUsers,
   },
   {
     path: "/update-user/:id",
@@ -45,7 +33,19 @@ const router = createBrowserRouter([
     path: "/emailsSpam",
     Component: EmailsSpam,
   },
-]);
+  {
+    path: "/login",
+    Component: Login,
+  },
+  {
+    path: "/profile/:id",
+    Component: UserProfile
+  },
+  {
+    path: "/logout/:id",
+    Component: Logout
+  },
+]); 
 
 export default function App() {
   return <RouterProvider router={router} fallbackElement={<p>Loading...</p>} />;
