@@ -47,10 +47,10 @@ export default (app: Express) => {
     new CarrinhoController(router, di.getService(CarrinhoService)).router
   )
   
-  app.use(
+  /*app.use(
     prefix,
     new EmailController(router, di.getService(EmailService)).router
-  );
+  );*/
 
   app.use(
     prefix,
