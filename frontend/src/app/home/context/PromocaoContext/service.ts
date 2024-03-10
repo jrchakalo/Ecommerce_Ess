@@ -53,7 +53,7 @@ export default class PromocaoService {
         payload: RequestStatus.loading(),
       });
 
-      const result = await this.apiService.get("/promocoes");
+      const result = await this.apiService.get("/promocoes/all");
 
       result.handle({
         onSuccess: (response) => {
