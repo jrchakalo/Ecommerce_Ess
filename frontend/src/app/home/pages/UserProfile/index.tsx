@@ -40,7 +40,7 @@ const UserProfile = () => {
         })}
       </div>
       <br />
-      <Link to={`/update-user/${id}`} className={styles.linkButton}>
+      <Link data-cy ="update-button" to={`/update-user/${id}`} className={styles.linkButton}>
         <Button type="button">Atualizar Usuário</Button>
       </Link>
       

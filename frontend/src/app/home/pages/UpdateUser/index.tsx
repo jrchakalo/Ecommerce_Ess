@@ -38,6 +38,8 @@ const UpdateUser = () => {
       if (state.updateUserRequestStatus.isSuccess() && !isUpdateSuccess) {
         alert("Usuário atualizado com sucesso!");
         setIsUpdateSuccess(true);
+      }else{
+        alert("Erro ao atualizar usuário!");
       }
     }
   }, [state, prevState]);
@@ -89,7 +91,7 @@ const UpdateUser = () => {
           )}
         </div>
   
-        <Button data-cy="create" type="submit" disabled={state.updateUserRequestStatus.isLoading()}>
+        <Button data-cy="update-button" type="submit" disabled={state.updateUserRequestStatus.isLoading()}>
           {isLoading ? "Atualizando..." : "Atualizar"}
         </Button>
 
