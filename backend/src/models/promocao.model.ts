@@ -48,7 +48,7 @@ class PromocaoModel {
 
         try {
             fs.readFileSync(filePathPromocoes, 'utf-8');
-            // console.log('Conteúdo do arquivo foi lido com sucesso!');
+            // //console.log('Conteúdo do arquivo foi lido com sucesso!');
             let promocoesJson = JSON.parse(fs.readFileSync(filePathPromocoes, 'utf-8'));
 
             if (promocoesJson && Array.isArray(promocoesJson)) {
@@ -57,7 +57,7 @@ class PromocaoModel {
                         return true;
                     }
                 }
-                // console.log('Conteúdo do arquivo foi lido com sucesso2!');
+                // //console.log('Conteúdo do arquivo foi lido com sucesso2!');
             }
         } catch (err) {
             console.error('Erro ao ler o conteúdo do arquivo:', err);
@@ -137,7 +137,7 @@ class PromocaoModel {
         //     console.error('Erro ao limpar o conteúdo do arquivo:', err);
         //     return;
         //     }
-        //     console.log('Conteúdo do arquivo foi limpo com sucesso!');
+        //     //console.log('Conteúdo do arquivo foi limpo com sucesso!');
         // });
 
         if (fs.existsSync(filePathPromocoes)) {

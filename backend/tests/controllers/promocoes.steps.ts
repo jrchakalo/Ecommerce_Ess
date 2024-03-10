@@ -196,7 +196,7 @@ defineFeature(feature, (test) => {
         });
         and (/^uma requisição POST for enviada para "(.*)" enviando os dados do novo cupom$/, async (rota) => {
             response = await request.post(rota).send(promocaoData);
-            console.log("MENSAGEM: " +JSON.stringify(response.body.msg));
+            //console.log("MENSAGEM: " +JSON.stringify(response.body.msg));
         });
         then(/^uma mensagem de aviso é enviada "(.*)"$/, (expectedMessage) => {
             expect(response.status).toBe(400);
@@ -645,8 +645,8 @@ defineFeature(feature, (test) => {
         });
 
         // and(/^o cupom "(.*)" tem campo "(.*)" com "(.*)"$/, async (id, campo, valor) => {
-        //     // console.log("CAMPO: " + campo);
-        //     // console.log("VALOR: " + valor);
+        //     // //console.log("CAMPO: " + campo);
+        //     // //console.log("VALOR: " + valor);
         //     promocaoData.preencherCampo(campo, valor);
         // });
 
@@ -660,7 +660,7 @@ defineFeature(feature, (test) => {
 
         and(/^o cupom "(.*)" tem campo "(.*)" com "(.*)"$/, async (id, campo, valor) => {
             promocaoData.preencherCampo(campo, valor);
-            console.log("PROMOCAODATA: " + JSON.stringify(promocaoData));
+            //console.log("PROMOCAODATA: " + JSON.stringify(promocaoData));
             promocaoData.salvarPromocao(promocaoData);
         });
 
@@ -711,9 +711,9 @@ defineFeature(feature, (test) => {
         });
 
         and(/^o cupom "(.*)" tem campo "(.*)" com "(.*)"$/, async (id,campo,data) => {
-            console.log("ID: " + id);
-            console.log("CAMPO: " + campo);
-            console.log("DATA: " + data);
+            //console.log("ID: " + id);
+            //console.log("CAMPO: " + campo);
+            //console.log("DATA: " + data);
             expect(promocaoData.verificarPromocaoByCampo(id,campo,data)).toBe(true);
 
         });
@@ -741,8 +741,8 @@ defineFeature(feature, (test) => {
         });
 
         // and(/^o cupom "(.*)" tem campo "(.*)" com "(.*)"$/, async (id, campo, valor) => {
-        //     // console.log("CAMPO: " + campo);
-        //     // console.log("VALOR: " + valor);
+        //     // //console.log("CAMPO: " + campo);
+        //     // //console.log("VALOR: " + valor);
         //     promocaoData.preencherCampo(campo, valor);
         // });
 
@@ -756,7 +756,7 @@ defineFeature(feature, (test) => {
 
         and(/^o cupom "(.*)" tem campo "(.*)" com "(.*)"$/, async (id, campo, valor) => {
             promocaoData.preencherCampo(campo, valor);
-            console.log("PROMOCAODATA: " + JSON.stringify(promocaoData));
+            //console.log("PROMOCAODATA: " + JSON.stringify(promocaoData));
             promocaoData.salvarPromocao(promocaoData);
         });
 
@@ -807,9 +807,9 @@ defineFeature(feature, (test) => {
         });
 
         and(/^o cupom "(.*)" tem campo "(.*)" com "(.*)"$/, async (id,campo,data) => {
-            console.log("ID: " + id);
-            console.log("CAMPO: " + campo);
-            console.log("DATA: " + data);
+            //console.log("ID: " + id);
+            //console.log("CAMPO: " + campo);
+            //console.log("DATA: " + data);
             expect(promocaoData.verificarPromocaoByCampo(id,campo,data)).toBe(true);
 
         });
@@ -947,7 +947,7 @@ defineFeature(feature, (test) => {
 
         then(/^uma mensagem de aviso é enviada "(.*)"$/, async(expectedMessage) => {
 
-            console.log("MENSAGEM: " + response.body.msg);
+            //console.log("MENSAGEM: " + response.body.msg);
 
             expect(response.status).toBe(400);
             expect(response.body.msg).toBe(expectedMessage);
@@ -1026,7 +1026,7 @@ defineFeature(feature, (test) => {
 
         then(/^uma mensagem de aviso é enviada "(.*)"$/, async(expectedMessage) => {
 
-            console.log("MENSAGEM: " + response.body.msg);
+            //console.log("MENSAGEM: " + response.body.msg);
 
             expect(response.status).toBe(400);
             expect(response.body.msg).toBe(expectedMessage);
@@ -1105,7 +1105,7 @@ defineFeature(feature, (test) => {
 
         then(/^uma mensagem de aviso é enviada "(.*)"$/, async(expectedMessage) => {
 
-            console.log("MENSAGEM: " + response.body.msg);
+            //console.log("MENSAGEM: " + response.body.msg);
 
             expect(response.status).toBe(400);
             expect(response.body.msg).toBe(expectedMessage);
@@ -1171,7 +1171,7 @@ defineFeature(feature, (test) => {
 
         then(/^uma mensagem de aviso é enviada "(.*)"$/, async(expectedMessage) => {
 
-            console.log("MENSAGEM: " + response.body.msg);
+            //console.log("MENSAGEM: " + response.body.msg);
 
             expect(response.status).toBe(200);
             expect(response.body.msg).toBe(expectedMessage);
@@ -1223,7 +1223,7 @@ defineFeature(feature, (test) => {
 
         then(/^uma mensagem de aviso é enviada "(.*)"$/, async(expectedMessage) => {
 
-            console.log("MENSAGEM: " + response.body.msg);
+            //console.log("MENSAGEM: " + response.body.msg);
 
             expect(response.status).toBe(404);
             expect(response.body.msg).toBe(expectedMessage);

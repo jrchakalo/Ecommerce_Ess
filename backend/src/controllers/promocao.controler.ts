@@ -76,8 +76,8 @@ class PromocaoController {
     // Extrai os dados do corpo da requisição
     const promocao = await this.promocaoService.createPromocao(new PromocaoEntity(req.body))
 
-    //console.log("REQ: ", req);
-    console.log("PROMOÇÃO: ", promocao);
+    ////console.log("REQ: ", req);
+    //console.log("PROMOÇÃO: ", promocao);
 
     // Retorna a nova promoção criada
     return new SuccessResult({
