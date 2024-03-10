@@ -25,7 +25,7 @@ const HomePage = () => {
       <div className={styles.buttonContainer}>
         {state.isLogged ? (
           <>
-            <Link to={`/profile/${state.userId}`} className={styles.linkButton}>
+            <Link data-cy = "profile-button" to={`/profile/${state.userId}`} className={styles.linkButton}>
               Perfil
             </Link>
             <Link to={`/logout/${state.userId}`} className={styles.linkButton} onClick={handleLogout}>

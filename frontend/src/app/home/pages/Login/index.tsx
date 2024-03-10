@@ -39,13 +39,13 @@ const Login = () => {
       <form className={styles.formContainer} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.formInputContainer}>
           <input
-            data-cy="input-name"
+            data-cy="input-login"
             {...register("login")}
             placeholder="Digite seu login"
             className={styles.formInput}
           />
           {errors.login && (
-            <span data-cy="input-name-error" className={styles.formError}>
+            <span data-cy="input-login-error" className={styles.formError}>
               {errors.login?.message}
             </span>
           )}
@@ -66,7 +66,7 @@ const Login = () => {
           )}
         </div>
   
-        <Button data-cy="login" type="submit" disabled={state.loginRequestStatus.isLoading()}>
+        <Button data-cy="login-button" type="submit" disabled={state.loginRequestStatus.isLoading()}>
           {state.loginRequestStatus.isLoading() ? "Logando..." : "LOGIN"}
         </Button>
       </form>
