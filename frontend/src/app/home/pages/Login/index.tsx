@@ -35,7 +35,7 @@ const Login = () => {
 
   return (
     <section className={styles.container}>
-      <h1 className={styles.title}>Login</h1>
+      <h1 className={styles.title}>Livraria Júlio Verne</h1>
       <form className={styles.formContainer} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.formInputContainer}>
           <input
