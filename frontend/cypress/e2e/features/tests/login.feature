@@ -17,3 +17,8 @@ Scenario: Login com falha por senha incorreta
     Given que eu tenho um usuário cadastrado com o CPF "12345678999", o email "canetaazul@email.com", o login "manoelgomees" e com a senha "senha123" e que eu estou na página de login
     When eu preencho o campo login com "jrchakalo" e eu preencho o campo senha com "senha1234" e clico no botão "login-button"
     Then o login deve falhar
+
+Scenario: Redirecionamento para página de login ao clicar em "Login"
+    Given que estou na página inicial
+    When eu clico no botão "Login"
+    Then devo ser redirecionado para a página de login
