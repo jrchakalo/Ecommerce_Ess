@@ -33,8 +33,6 @@ const CreateUser = () => {
       state.createUserRequestStatus.isSuccess()
     ) {
       alert("Usuário criado com sucesso! Você será rediriceionado para a página de login.");
-    }else{
-      alert("Erro ao criar usuário! Tente novamente.");
     }
   }, [state, prevState]);
 

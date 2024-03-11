@@ -11,7 +11,7 @@ class EmailService {
     this.emailRepository = emailRepository;
   }
 
-  /*public async sendEmails(data: EmailEntity): Promise<EmailModel> {
+  public async sendEmails(data: EmailEntity): Promise<EmailModel> {
 
     const emailEntity = await this.emailRepository.sendEmails(data);
     const emailModel = new EmailModel(emailEntity);
@@ -41,13 +41,6 @@ class EmailService {
     return !email.isDelivered;
 }
 
-  public async sendEmailWithoutReceipt(data: EmailEntity): Promise<EmailModel> {
-    const emailEntity = await this.emailRepository.sendEmailWithoutReceipt(data);
-    const emailModel = new EmailModel(emailEntity);
-
-    return emailModel;
-  }
-
   public async getAllEmails(): Promise<EmailModel[]> {
     const emailEntity = await this.emailRepository.getAllEmails();
     const emailModel: EmailModel[] = [];
@@ -63,12 +56,12 @@ class EmailService {
       return emailModel;
   }
 
-  public async getSpamEmails(): Promise<EmailModel[]> {
-    const spamEmailEntities = await this.emailRepository.getSpamEmails();
+  public async getAllSpamEmails(): Promise<EmailModel[]> {
+    const spamEmailEntities = await this.emailRepository.getAllSpamEmails();
     const spamEmailModels: EmailModel[] = spamEmailEntities.map((emailEntity: EmailEntity) => new EmailModel(emailEntity));
 
     return spamEmailModels;
-  }*/
+  }
 }
 
 export default EmailService;

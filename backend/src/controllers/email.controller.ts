@@ -11,7 +11,7 @@ class EmailController {
   private emailService: EmailService;
   private idCount: number = 1;
 
-  /*constructor(router: Router, emailService: EmailService) {
+  constructor(router: Router, emailService: EmailService) {
     this.router = router;
     this.emailService = emailService;
     this.initRoutes();
@@ -27,14 +27,11 @@ class EmailController {
     this.router.get(`${this.prefix}/spam/:id`, (req: Request, res: Response) =>
       this.checkEmailInSpamFolder(req, res));
 
-    this.router.get(`${this.prefix}/semComprovante/`, (req: Request, res: Response) =>
-      this.sendEmailWithoutReceipt(req, res));
-
     this.router.get(this.prefix, (req: Request, res: Response) =>
       this.getAllEmails(req, res));
 
     this.router.get(this.prefix, (req: Request, res: Response) =>
-      this.getSpamEmails(req, res));
+      this.getAllSpamEmails(req, res));
   }
 
   private async sendEmails(req: Request, res: Response) {
@@ -96,18 +93,6 @@ class EmailController {
     }).handle(res);
   }
 
-  private async sendEmailWithoutReceipt(req: Request, res: Response) {
-    req.body.id = this.generateId();
-  
-    // Enviar e-mail com os dados fornecidos
-    const email = await this.emailService.sendEmailWithoutReceipt(new EmailEntity(req.body));
-
-    return new SuccessResult({
-      msg: 'E-mail enviado sem o comprovante',
-      data: email
-    }).handle(res);
-  }
-
   private async getAllEmails(req: Request, res: Response) {
     // Busca todos os usuários
     const emails = await this.emailService.getAllEmails();
@@ -128,9 +113,9 @@ class EmailController {
     }).handle(res);
   }
 
-  private async getSpamEmails(req: Request, res: Response) {
+  private async getAllSpamEmails(req: Request, res: Response) {
     // Busca todos os usuários
-    const emailsSpam = await this.emailService.getSpamEmails();
+    const emailsSpam = await this.emailService.getAllSpamEmails();
 
     if (!emailsSpam) {
         // Retorna um erro caso não haja usuários
@@ -160,7 +145,7 @@ class EmailController {
     
     this.idCount = parseInt(id) + 1;
     return this.idCount.toString();
-  }*/
+  }
 }
 
 export default EmailController;
