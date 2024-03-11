@@ -45,6 +45,9 @@ const ProductPage = () => {
                         <Link to="/login" className={styles.linkButton}>
                             Login
                         </Link>
+                        <Link to="/home" className={styles.linkButton}>
+                            Home
+                        </Link>
                         <Link to="/create-user" className={styles.linkButton}>
                             Cadastro
                         </Link>

@@ -44,6 +44,9 @@ const ListPromocoes = () => {
       <Link to="/create-promocao" replace>
         CRIAR PROMOÇÃO
       </Link>
+      <Link to="/home" replace>
+        VOLTAR PARA O INÍCIO
+      </Link>
     </section>
   );
 };

@@ -39,8 +39,6 @@ const UpdateUser = () => {
       if (state.updateUserRequestStatus.isSuccess() && !isUpdateSuccess) {
         alert("Usuário atualizado com sucesso!");
         setIsUpdateSuccess(true);
-      }else{
-        alert("Erro ao atualizar usuário!");
       }
     }
   }, [state, prevState]);

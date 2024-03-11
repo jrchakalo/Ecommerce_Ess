@@ -9,10 +9,9 @@
 }
 
 .logo {
-  width: auto;
-  height: auto;
-  object-fit: cover;
-  margin-bottom: 30px;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
 }
 
 .header {
@@ -62,9 +61,14 @@
   background-color: #FCDEBE;
 }
 
+.productBox:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 .buttonContainer {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   margin-top: 20px; 
 }
 
@@ -124,3 +128,29 @@
   border: #C73E1D
 }
 
+.backGroudContainer {
+  background-color: #C73E1D;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-radius: 10px;
+}
+
+.headerCustom{
+  color: #fff;
+  font-size: 36px;
+  margin-bottom: 20px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.headerCustom2{
+  color: #fff;
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-family: 'Montserrat', sans-serif;
+}

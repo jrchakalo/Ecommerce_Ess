@@ -32,12 +32,13 @@ Then("o login deve falhar", () => {
 });
 
 //Scenario: Login com falha por senha incorreta
+
 //Scenario: Acessar página de login
 Given("que estou na página inicial", () => {
   cy.visit("/home"); // Visita a página inicial
 });
 
-When("eu clico no botão {string}", (buttonText) => {
+When("eu clico no botão {string}", (buttonText:string) => {
   cy.contains(buttonText).click(); // Clica no botão especificado
 });
 

@@ -144,6 +144,9 @@ const CreateUser = () => {
                 className="fluid"
               />
             </Link>
+            {state.createUserRequestStatus.isFailure() && (
+              <p className={styles.errorMessage}>{state.createUserRequestStatus.error.message}</p>
+            )}
               
             </Form>
           </Segment>
@@ -158,9 +161,7 @@ const CreateUser = () => {
         <><p className={styles.successMessage}>Usuário criado com sucesso!</p><Navigate to="/login" replace /></>
       )}
   
-      {state.createUserRequestStatus.isFailure() && (
-        <p className={styles.errorMessage}>{state.createUserRequestStatus.error.message}</p>
-      )}
+      
   
       
     </section>

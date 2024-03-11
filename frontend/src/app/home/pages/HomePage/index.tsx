@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import styles from "./index.module.css";
 import { LoginContext } from "../../context/LoginContext";
 import { useContext} from "react";
+import 'semantic-ui-css/semantic.min.css';
+import { Form, Grid, Header, Button, Segment, Divider, Image } from "semantic-ui-react"; 
 
 const HomePage = () => {
   const { state } = useContext(LoginContext);
@@ -12,56 +14,57 @@ const HomePage = () => {
     alert ("Usuário deslogado com sucesso!");
     window.location.reload(); // Marcar que a página deve ser recarregada
   }
+
+  
   
   return (
     <section className={styles.container}>
-      <div className={styles.logo}>
+      <div className={styles.backGroudContainer}>
         <img src={images.logo} alt="Logo" className={styles.logoImage} />
       </div>
-      <div className={styles.header}>
-        <h1 className={styles.title}>Livraria Júlio Verne</h1>
-        <p className={styles.subtitle}>Seu universo de leitura!</p>
-      </div>
+        <h1 className={styles.headerCustom}>Seja bem-vindo à</h1>
+        <h1 className={styles.headerCustom}>Livraria Júlio Verne</h1>
+        <h1 className={styles.headerCustom2}>Seu universo de leitura!</h1>
       <div className={styles.buttonContainer}>
         {state.isLogged ? (
           <>            
             {(state.userId == '0') ? ( // Verifica se o ID do usuário é "01"
               <>
-                <Link data-cy="promocoes-button" to={`/create-promocao`} className={styles.linkButton}>
-                  Cadastrar Promoções 
+                <Link data-cy="promocoes-button" to={`/create-promocao`}>
+                  <Button color='orange'>Cadastrar Promoções </Button> 
                 </Link>
-                <Link data-cy="promocoes-button" to={`/promocoes`} className={styles.linkButton}>
-                  Todas as Promoções 
+                <Link data-cy="promocoes-button" to={`/promocoes`}>
+                  <Button color='orange'>Todas as Promoções </Button>
                 </Link>
               </>
             ) : (
               <>
-                <Link data-cy="promocoes-button" to={`/promocoes/user/${state.userId}`} className={styles.linkButton}>
-                  Minhas Promoções
+                <Link data-cy="promocoes-button" to={`/promocoes/user/${state.userId}`}>
+                  <Button color='orange'>Minhas Promoções </Button>
                 </Link>  
-                <Link data-cy="profile-button" to={`/profile/${state.userId}`} className={styles.linkButton}>
-                  Perfil
+                <Link data-cy="profile-button" to={`/profile/${state.userId}`}>
+                  <Button color='orange'>Perfil </Button>
                 </Link>              
               </>
             )}
-            <Link to={`/logout/${state.userId}`} className={styles.linkButton} onClick={handleLogout}>
-              Logout
+            <Link to={`/logout/${state.userId}`} onClick={handleLogout}>
+              <Button color='orange'>Logout </Button>
             </Link>
           </>
         ) : (
           <>
-            <Link to="/login" className={styles.linkButton}>
-              Login
+            <Link data-cy="login-button" to="/login">
+              <Button color='orange'>Login </Button>
             </Link>
-            <Link to="/create-user" className={styles.linkButton}>
-              Cadastro
+            <Link data-cy="register-button" to="/create-user">
+              <Button color='orange'>Cadastro </Button>
             </Link>
-
           </>
         )}
       </div>
+      <Divider />
       <div className={styles.productSection}>
-        <h2 className={styles.productTitle}>Produtos em destaque</h2>
+        <h2 className={styles.headerCustom2}>Produtos em destaque</h2>
         <div className={styles.productContainer}>
             <div className={styles.productBox}>
                 <img src={images.livro1} alt="Produto 1" className={styles.productImage} />
@@ -69,7 +72,7 @@ const HomePage = () => {
                 <h3 className={styles.productName}>Viagem ao Centro da Terra</h3>
                 <p className={styles.productPrice}>R$ 62,00</p>
                 <Link to="/product/1">
-                Comprar
+                 <Button color='orange'>Comprar </Button>
                 </Link>
                 </div>
             </div>
@@ -79,7 +82,7 @@ const HomePage = () => {
                 <h3 className={styles.productName}>20 Mil Léguas Submarinas</h3>
                 <p className={styles.productPrice}>R$ 41,00</p>
                 <Link to="/product/2">
-                Comprar
+                  <Button color='orange'>Comprar </Button>
                 </Link>
                 </div>
             </div>
@@ -89,7 +92,7 @@ const HomePage = () => {
                 <h3 className={styles.productName}>A Ilha Misteriosa</h3>
                 <p className={styles.productPrice}>R$ 32,00</p>
                 <Link to="/product/3">
-                Comprar
+                  <Button color='orange'>Comprar </Button>
                 </Link>
                 </div>
             </div>
@@ -99,7 +102,7 @@ const HomePage = () => {
                 <h3 className={styles.productName}>A Volta Ao Mundo Em 80 Dias</h3>
                 <p className={styles.productPrice}>R$ 48,00</p>
                 <Link to="/product/4">
-                Comprar
+                  <Button color='orange'>Comprar </Button>
                 </Link>
                 </div>
             </div>
@@ -109,7 +112,7 @@ const HomePage = () => {
                 <h3 className={styles.productName}>Da Terra á Lua</h3>
                 <p className={styles.productPrice}>R$ 32,00</p>
                 <Link to="/product/5">
-                Comprar
+                  <Button color='orange'>Comprar </Button>
                 </Link>
                 </div>
             </div>
@@ -119,7 +122,7 @@ const HomePage = () => {
                 <h3 className={styles.productName}>Robur, O Conquistador</h3>
                 <p className={styles.productPrice}>R$ 27,00</p>
                 <Link to="/product/6">
-                Comprar
+                  <Button color='orange'>Comprar </Button>
                 </Link>
                 </div>
             </div>
@@ -129,7 +132,7 @@ const HomePage = () => {
                 <h3 className={styles.productName}>O Castelo Dos Cárpatos</h3>
                 <p className={styles.productPrice}>R$ 29,00</p>
                 <Link to="/product/7">
-                Comprar
+                  <Button color='orange'>Comprar </Button>
                 </Link>
                 </div>
             </div>
@@ -139,7 +142,7 @@ const HomePage = () => {
                 <h3 className={styles.productName}>O Raio Verde</h3>
                 <p className={styles.productPrice}>R$ 24,00</p>
                 <Link to="/product/8">
-                Comprar
+                  <Button color='orange'>Comprar </Button>
                 </Link>
                 </div>
             </div>
@@ -149,7 +152,7 @@ const HomePage = () => {
                 <h3 className={styles.productName}>O Senhor Do Mundo</h3>
                 <p className={styles.productPrice}>R$ 46,00</p>
                 <Link to="/product/9">
-                Comprar
+                  <Button color='orange'>Comprar </Button>
                 </Link>
                 </div>
             </div>
@@ -159,7 +162,7 @@ const HomePage = () => {
                 <h3 className={styles.productName}>Cinco Semanas Em Um Balão</h3>
                 <p className={styles.productPrice}>R$ 37,00</p>
                 <Link to="/product/10">
-                Comprar
+                  <Button color='orange'>Comprar </Button>
                 </Link>
                 </div>
             </div>
