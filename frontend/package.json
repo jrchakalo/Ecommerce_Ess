@@ -27,6 +27,8 @@
     "react-hook-form": "^7.44.1",
     "react-input-mask": "^2.0.4",
     "react-router-dom": "^6.11.2",
+    "semantic-ui-css": "^2.5.0",
+    "semantic-ui-react": "^2.1.5",
     "zod": "^3.21.4"
   },
   "devDependencies": {
