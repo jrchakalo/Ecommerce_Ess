@@ -41,7 +41,10 @@ const PromocaoProfile = () => {
         <Button type="button">Atualizar Promoção</Button>
       </Link>
       
-      
+      <Link data-cy ="list-button" to={`/promocoes`} className={styles.linkButton}>
+        <Button type="button">Voltar para as promoções</Button>
+      </Link>
+
       <Link to="/home" className={styles.linkButton}>
         <Button type="button">Voltar para o início</Button> 
       </Link>

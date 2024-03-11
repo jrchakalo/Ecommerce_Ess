@@ -29,12 +29,9 @@ const ListPromocoes = () => {
                     >
                       {promocao.nome}
                     </span>
-
-                    <Link to="/promocao/${promocao.id}" replace>
-                      SELECIONAR
-                    </Link>
-                    <Link to="/promocao/${promocao.id}" replace>
-                      DELETAR
+                    
+                    <Link to={`/promocao/${promocao.id}`} replace>
+                      EDITAR
                     </Link>
                   </div>
                 );

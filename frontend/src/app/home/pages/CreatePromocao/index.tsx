@@ -33,8 +33,6 @@ const CreatePromocao = () => {
       state.createPromocaoRequestStatus.isSuccess()
     ) {
       alert("Promoção criada com sucesso! Você será redirecionad@ para a página de promoções cadastradas.");
-    }else{
-      alert("Erro ao criar Promoção! Tente novamente.");
     }
   }, [state, prevState]);
 

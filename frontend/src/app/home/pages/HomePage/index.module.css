@@ -2,6 +2,8 @@
   max-width: auto;
   margin: 0 auto;
   padding: 20px;
+  height: fill-available;
+  width: fill-available;
   text-align: center;
   background-color: #6E8898;
 }

@@ -10,7 +10,7 @@ class UserRepository extends BaseRepository<UserEntity> {
   
   public async createUser(data: UserEntity): Promise<UserEntity> {
     if(!fs.existsSync(userJsonPath)){
-      fs.writeFileSync(userJsonPath, '[]');
+      fs.writeFileSync(userJsonPath, JSON.stringify([{ "id": "0", "nome": "admin", "cpf": "00000000000", "dataNascimento": "00/00/0000", "email": "ehoadm@adm.com", "login": "admin", "senha": "admin", "logado": false}]));
     }
     const usersJson = JSON.parse(fs.readFileSync(userJsonPath, 'utf-8'));
 

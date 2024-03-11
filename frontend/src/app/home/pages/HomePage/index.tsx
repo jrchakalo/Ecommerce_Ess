@@ -25,39 +25,31 @@ const HomePage = () => {
       <div className={styles.buttonContainer}>
         {state.isLogged ? (
           <>            
-            {state.userId === "01" ? ( // Verifica se o ID do usuário é "01"
+            {(state.userId == '0') ? ( // Verifica se o ID do usuário é "01"
               <>
+                <Link data-cy="promocoes-button" to={`/create-promocao`} className={styles.linkButton}>
+                  Cadastrar Promoções 
+                </Link>
                 <Link data-cy="promocoes-button" to={`/promocoes`} className={styles.linkButton}>
-                  Promoções Cadastradas
+                  Todas as Promoções 
                 </Link>
               </>
-              
             ) : (
               <>
                 <Link data-cy="promocoes-button" to={`/promocoes/user/${state.userId}`} className={styles.linkButton}>
-                  Promoções
-                </Link>                
+                  Minhas Promoções
+                </Link>  
+                <Link data-cy="profile-button" to={`/profile/${state.userId}`} className={styles.linkButton}>
+                  Perfil
+                </Link>              
               </>
-              
             )}
-            <Link data-cy="profile-button" to={`/profile/${state.userId}`} className={styles.linkButton}>
-              Perfil
-            </Link>
             <Link to={`/logout/${state.userId}`} className={styles.linkButton} onClick={handleLogout}>
               Logout
-            </Link>
-            <Link to={`/emails}`} className={styles.linkButton}>
-              E-mail
             </Link>
           </>
         ) : (
           <>
-            <Link data-cy="promocoes-button" to={`/create-promocao`} className={styles.linkButton}>
-              Promocoes Cadastradas
-            </Link>
-            <Link data-cy="promocoes-button" to={`/promocoes/user/${state.userId}`} className={styles.linkButton}>
-              Promocoes
-            </Link>
             <Link to="/login" className={styles.linkButton}>
               Login
             </Link>

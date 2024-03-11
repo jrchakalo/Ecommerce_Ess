@@ -38,8 +38,6 @@ const UpdatePromocao = () => {
       if (state.updatePromocaoRequestStatus.isSuccess() && !isUpdateSuccess) {
         alert("Promoção atualizada com sucesso!");
         setIsUpdateSuccess(true);
-      }else{
-        alert("Erro ao atualizar promoção!");
       }
     }
   }, [state, prevState]);
@@ -97,12 +95,12 @@ const UpdatePromocao = () => {
         </Button>
 
         <Button data-cy="cancel" type="button">
-          <Link to={`/profile/${id}`} className={styles.linkButton}>Cancelar</Link>
+          <Link to={`/promocao/${id}`} className={styles.linkButton}>Cancelar</Link>
         </Button>
       </form>
   
       {isUpdateSuccess && (
-        <Navigate to={`/promocoes/all`} />
+        <Navigate to={`/promocao/${id}`} />
       )}
   
       {state.updatePromocaoRequestStatus.isFailure() && (

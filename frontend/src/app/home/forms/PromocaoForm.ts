@@ -20,7 +20,7 @@ const isTipoValid = (value: string): boolean => {
 
 const isValidadeValid = (value: string): boolean => {
     // Verificar se validade é igual a uma das possibilidades cadastradas
-    if (!(value == "clientes com cadastro de 3 meses ou menos" || value == "clientes com cadastros com mais de 3 meses" || value == "clientes com cadastro com mais de 1 ano OU terem efetuado 12 compras no mínimo")) {
+    if (!(value == "<3M" || value == ">3M" || value == "min12")) {
         return false; // Se tipo não é igual a uma das possibilidades cadastradas
     }
 
@@ -36,10 +36,10 @@ export const PromocaoFormSchema = z.object({
     .refine((value) => isValorValid(value), { message: "Informe um valor de 10 a 70" }),
   tipo: z
     .string()
-    .refine((value) => isTipoValid(value), { message: "Informe um tipo válido" }),
+    .refine((value) => isTipoValid(value), { message: "Informe um tipo válido: HQ, Livro, Mangá, Revista, Geral" }),
   validade: z
     .string()
-    .refine((value) => isValidadeValid(value), { message: "Informe um tipo válido" }),
+    .refine((value) => isValidadeValid(value), { message: "Informe um tipo válido: <3M, >3M, min12" }),
 });
 
 export type PromocaoFormType = z.infer<typeof PromocaoFormSchema>;
