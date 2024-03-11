@@ -32,3 +32,16 @@ Then("o login deve falhar", () => {
 });
 
 //Scenario: Login com falha por senha incorreta
+//Scenario: Acessar página de login
+Given("que estou na página inicial", () => {
+  cy.visit("/home"); // Visita a página inicial
+});
+
+When("eu clico no botão {string}", (buttonText) => {
+  cy.contains(buttonText).click(); // Clica no botão especificado
+});
+
+Then("devo ser redirecionado para a página de login", () => {
+  // Verifica se a URL foi redirecionada para a página de login
+  cy.url().should("include", "/login");
+});
