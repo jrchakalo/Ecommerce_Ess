@@ -23,7 +23,7 @@ const HomePage = () => {
         <img src={images.logo} alt="Logo" className={styles.logoImage} />
       </div>
         <h1 className={styles.headerCustom}>Seja bem-vindo à</h1>
-        <h1 className={styles.headerCustom}>Livraria Júlio Verne</h1>
+        <h1 className={styles.headerCustom3}>Livraria Júlio Verne</h1>
         <h1 className={styles.headerCustom2}>Seu universo de leitura!</h1>
       <div className={styles.buttonContainer}>
         {state.isLogged ? (
