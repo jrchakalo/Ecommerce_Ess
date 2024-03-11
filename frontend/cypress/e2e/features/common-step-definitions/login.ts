@@ -1,60 +1,34 @@
-import { Given, When, Then } from "cypress-cucumber-preprocessor/steps";
+import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
 //Scenario: Login com sucesso
-Given("que eu tenho um usuário cadastrado com o login {string} com a senha {string}", (login, senha) => {
-  
+Given("que eu tenho um usuário cadastrado com o CPF {string}, o email {string}, o login {string} e com a senha {string} e que eu estou na página de login", (cpf:string, email:string, login:string, senha:string) => {
+  cy.visit("/create-user");
+  cy.getDataCy('input-name').type('Mateus');
+  cy.getDataCy('input-cpf').type(cpf);
+  cy.getDataCy('input-birthdate').type('24031993');
+  cy.getDataCy('input-email').type(email);
+  cy.getDataCy('input-login').type(login);
+  cy.getDataCy('input-password').type(senha);
+  cy.getDataCy('create').click();
 });
 
-When("eu preencho os campos com os dados {string} e {string}", (login, senha) => {
-  cy.get("[data-cy=input-login]").type(login);
-  cy.get("[data-cy=input-password]").type(senha);
-  cy.get("[data-cy=login-button]").click();
+When("eu preencho o campo login com {string} e eu preencho o campo senha com {string} e clico no botão {string}", (login:string, senha:string, botao:string) => {
+  cy.getDataCy('input-login').type(login);
+  cy.getDataCy("input-password").type(senha);
+  cy.getDataCy(botao).click();
 });
 
-Then("devo conseguir logar no sistema", () => {
-  cy.url().should("include", "/home");
-});
-
-And("uma mensagem {string}", (message) => {
-  cy.contains(message).should("be.visible");
+Then("devo conseguir logar no sistema e receber uma mensagem {string}", (text: string) => {
+  cy.on("window:alert", (str) => {
+    expect(str).to.equal(text);
+  });
 });
 
 
-//Scenario: falha no login por usuário incorreto
-Given("que eu tenho um usuário cadastrado com o login {string} com a senha {string}", (login, senha) => {
-  
-});
-
-When("eu preencho o login com os dados {string} e {string}", (login, senha) => {
-  cy.get("[data-cy=input-login]").type(login);
-  cy.get("[data-cy=input-password]").type(senha);
-  cy.get("[data-cy=login-button]").click();
-});
+//Scenario: Login com falha por usuário não encontrado
 
 Then("o login deve falhar", () => {
-  cy.url().should("not.include", "/home");
+  cy.url().should("include", "/login");
 });
 
-//And("eu recebo uma mensagem {string}", (message) => {
-//  cy.contains(message).should("be.visible");
-//});
-
-
-//Scenario: falha no login por senha incorreta
-Given("que eu tenho um usuário cadastrado com o login {string} com a senha {string}", (login, senha) => {
-  
-});
-
-When("eu preencho o login com os dados {string} e {string}", (login, senha) => {
-  cy.get("[data-cy=input-login]").type(login);
-  cy.get("[data-cy=input-password]").type(senha);
-  cy.get("[data-cy=login-button]").click();
-});
-
-Then("o login deve falhar", () => {
-  cy.url().should("not.include", "/home");
-});
-
-//And("uma mensagem {string}", (message) => {
-//  cy.contains(message).should("be.visible");
-//});
+//Scenario: Login com falha por senha incorreta
