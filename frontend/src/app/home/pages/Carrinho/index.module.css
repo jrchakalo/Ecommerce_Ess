@@ -1,0 +1,79 @@
+/* Estilo para o carrinho de compras */
+.cart {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilo para a lista de itens no carrinho */
+  .cartList {
+    list-style: none;
+    padding: 0;
+  }
+  
+  /* Estilo para cada item no carrinho */
+  .cartItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+  }
+  
+  .cartItem img {
+    max-width: 50px;
+    height: auto;
+    margin-right: 10px;
+  }
+  
+  .cartItemInfo {
+    flex: 1;
+  }
+  
+  .cartItemName {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .cartItemPrice {
+    font-size: 14px;
+    color: #e44d26;
+  }
+  
+  /* Estilo para o subtotal e botão de finalizar compra */
+  .cartTotal {
+    margin-top: 20px;
+    text-align: right;
+  }
+  
+  .cartTotalText {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .cartTotalAmount {
+    font-size: 18px;
+    color: #e44d26;
+    font-weight: bold;
+  }
+  
+  .checkoutButton {
+    background-color: #e44d26;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .checkoutButton:hover {
+    background-color: #333;
+  }
+  

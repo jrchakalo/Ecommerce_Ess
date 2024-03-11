@@ -24,8 +24,23 @@ const HomePage = () => {
       </div>
       <div className={styles.buttonContainer}>
         {state.isLogged ? (
-          <>
-            <Link data-cy = "profile-button" to={`/profile/${state.userId}`} className={styles.linkButton}>
+          <>            
+            {state.userId === "01" ? ( // Verifica se o ID do usuário é "01"
+              <>
+                <Link data-cy="promocoes-button" to={`/promocoes`} className={styles.linkButton}>
+                  Promoções Cadastradas
+                </Link>
+              </>
+              
+            ) : (
+              <>
+                <Link data-cy="promocoes-button" to={`/promocoes/user/${state.userId}`} className={styles.linkButton}>
+                  Promoções
+                </Link>                
+              </>
+              
+            )}
+            <Link data-cy="profile-button" to={`/profile/${state.userId}`} className={styles.linkButton}>
               Perfil
             </Link>
             <Link to={`/logout/${state.userId}`} className={styles.linkButton} onClick={handleLogout}>
@@ -37,12 +52,19 @@ const HomePage = () => {
           </>
         ) : (
           <>
+            <Link data-cy="promocoes-button" to={`/create-promocao`} className={styles.linkButton}>
+              Promocoes Cadastradas
+            </Link>
+            <Link data-cy="promocoes-button" to={`/promocoes/user/${state.userId}`} className={styles.linkButton}>
+              Promocoes
+            </Link>
             <Link to="/login" className={styles.linkButton}>
               Login
             </Link>
             <Link to="/create-user" className={styles.linkButton}>
               Cadastro
             </Link>
+
           </>
         )}
       </div>
@@ -54,7 +76,9 @@ const HomePage = () => {
                 <div className={styles.productInfo}>
                 <h3 className={styles.productName}>Viagem ao Centro da Terra</h3>
                 <p className={styles.productPrice}>R$ 62,00</p>
-                <button className={styles.productButton}>Comprar</button>
+                <Link to="/product/1">
+                Comprar
+                </Link>
                 </div>
             </div>
             <div className={styles.productBox}>
@@ -62,7 +86,9 @@ const HomePage = () => {
                 <div className={styles.productInfo}>
                 <h3 className={styles.productName}>20 Mil Léguas Submarinas</h3>
                 <p className={styles.productPrice}>R$ 41,00</p>
-                <button className={styles.productButton}>Comprar</button>
+                <Link to="/product/2">
+                Comprar
+                </Link>
                 </div>
             </div>
             <div className={styles.productBox}>
@@ -70,7 +96,9 @@ const HomePage = () => {
                 <div className={styles.productInfo}>
                 <h3 className={styles.productName}>A Ilha Misteriosa</h3>
                 <p className={styles.productPrice}>R$ 32,00</p>
-                <button className={styles.productButton}>Comprar</button>
+                <Link to="/product/3">
+                Comprar
+                </Link>
                 </div>
             </div>
             <div className={styles.productBox}>
@@ -78,7 +106,9 @@ const HomePage = () => {
                 <div className={styles.productInfo}>
                 <h3 className={styles.productName}>A Volta Ao Mundo Em 80 Dias</h3>
                 <p className={styles.productPrice}>R$ 48,00</p>
-                <button className={styles.productButton}>Comprar</button>
+                <Link to="/product/4">
+                Comprar
+                </Link>
                 </div>
             </div>
             <div className={styles.productBox}>
@@ -86,7 +116,9 @@ const HomePage = () => {
                 <div className={styles.productInfo}>
                 <h3 className={styles.productName}>Da Terra á Lua</h3>
                 <p className={styles.productPrice}>R$ 32,00</p>
-                <button className={styles.productButton}>Comprar</button>
+                <Link to="/product/5">
+                Comprar
+                </Link>
                 </div>
             </div>
             <div className={styles.productBox}>
@@ -94,7 +126,9 @@ const HomePage = () => {
                 <div className={styles.productInfo}>
                 <h3 className={styles.productName}>Robur, O Conquistador</h3>
                 <p className={styles.productPrice}>R$ 27,00</p>
-                <button className={styles.productButton}>Comprar</button>
+                <Link to="/product/6">
+                Comprar
+                </Link>
                 </div>
             </div>
             <div className={styles.productBox}>
@@ -102,7 +136,9 @@ const HomePage = () => {
                 <div className={styles.productInfo}>
                 <h3 className={styles.productName}>O Castelo Dos Cárpatos</h3>
                 <p className={styles.productPrice}>R$ 29,00</p>
-                <button className={styles.productButton}>Comprar</button>
+                <Link to="/product/7">
+                Comprar
+                </Link>
                 </div>
             </div>
             <div className={styles.productBox}>
@@ -110,7 +146,9 @@ const HomePage = () => {
                 <div className={styles.productInfo}>
                 <h3 className={styles.productName}>O Raio Verde</h3>
                 <p className={styles.productPrice}>R$ 24,00</p>
-                <button className={styles.productButton}>Comprar</button>
+                <Link to="/product/8">
+                Comprar
+                </Link>
                 </div>
             </div>
             <div className={styles.productBox}>
@@ -118,7 +156,9 @@ const HomePage = () => {
                 <div className={styles.productInfo}>
                 <h3 className={styles.productName}>O Senhor Do Mundo</h3>
                 <p className={styles.productPrice}>R$ 46,00</p>
-                <button className={styles.productButton}>Comprar</button>
+                <Link to="/product/9">
+                Comprar
+                </Link>
                 </div>
             </div>
             <div className={styles.productBox}>
@@ -126,7 +166,9 @@ const HomePage = () => {
                 <div className={styles.productInfo}>
                 <h3 className={styles.productName}>Cinco Semanas Em Um Balão</h3>
                 <p className={styles.productPrice}>R$ 37,00</p>
-                <button className={styles.productButton}>Comprar</button>
+                <Link to="/product/10">
+                Comprar
+                </Link>
                 </div>
             </div>
         </div>

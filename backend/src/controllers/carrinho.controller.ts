@@ -37,7 +37,8 @@ class CarrinhoController {
 
         return new SuccessResult({
             msg: 'Carrinho criado com sucesso',
-            data: cart
+            data: cart,
+            code: 201
         }).handle(res);
     }
 
@@ -48,12 +49,14 @@ class CarrinhoController {
         // buscar carrinho pelo ID
         const cart = await this.carrinhoService.getCarrinhoById(id);
 
+        console.log(cart);
         // retornar carrinho
 
         if (cart) {
             return new SuccessResult({
                 msg: 'Carrinho encontrado',
-                data: cart
+                data: cart,
+                code: 200
             }).handle(res);
         }
         return new FailureResult
@@ -81,6 +84,7 @@ class CarrinhoController {
         return new SuccessResult({
             msg: 'Produto adicionado ao carrinho',
             data: carrinho,
+            code: 200
         }).handle(res);
     }
 }
