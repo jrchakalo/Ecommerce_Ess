@@ -96,6 +96,7 @@ abstract class HttpError extends AppError {
       case "wrong_password":
         return "Senha incorreta.";
       default:
+        console.log("MSGCODE: " + msgCode);
         return "Ocorreu um erro inesperado. Tente novamente mais tarde.";
     }
   }

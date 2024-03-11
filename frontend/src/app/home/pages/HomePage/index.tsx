@@ -24,8 +24,23 @@ const HomePage = () => {
       </div>
       <div className={styles.buttonContainer}>
         {state.isLogged ? (
-          <>
-            <Link data-cy = "profile-button" to={`/profile/${state.userId}`} className={styles.linkButton}>
+          <>            
+            {state.userId === "01" ? ( // Verifica se o ID do usuário é "01"
+              <>
+                <Link data-cy="promocoes-button" to={`/promocoes`} className={styles.linkButton}>
+                  Promoções Cadastradas
+                </Link>
+              </>
+              
+            ) : (
+              <>
+                <Link data-cy="promocoes-button" to={`/promocoes/user/${state.userId}`} className={styles.linkButton}>
+                  Promoções
+                </Link>                
+              </>
+              
+            )}
+            <Link data-cy="profile-button" to={`/profile/${state.userId}`} className={styles.linkButton}>
               Perfil
             </Link>
             <Link to={`/logout/${state.userId}`} className={styles.linkButton} onClick={handleLogout}>
@@ -34,36 +49,10 @@ const HomePage = () => {
             <Link to={`/emails}`} className={styles.linkButton}>
               E-mail
             </Link>
-            {state.userId === "01" ? ( // Verifica se o ID do usuário é "01"
-              <>
-                <Link data-cy="promocoes-button" to={`/promocoes`} className={styles.linkButton}>
-                  Promocoes Cadastradas
-                </Link>
-                <Link data-cy="profile-button" to={`/profile/${state.userId}`} className={styles.linkButton}>
-                  Perfil
-                </Link>
-                <Link to={`/logout/${state.userId}`} className={styles.linkButton} onClick={handleLogout}>
-                  Logout
-                </Link>
-              </>
-              
-            ) : (
-              <>
-                <Link data-cy="promocoes-button" to={`/promocoes/user/${state.userId}`} className={styles.linkButton}>
-                  Promocoes
-                </Link>
-                <Link data-cy="profile-button" to={`/profile/${state.userId}`} className={styles.linkButton}>
-                  Perfil
-                </Link>
-                <Link to={`/logout/${state.userId}`} className={styles.linkButton} onClick={handleLogout}>
-                  Logout
-                </Link>
-              </>
-            )}
           </>
         ) : (
           <>
-            <Link data-cy="promocoes-button" to={`/promocoes`} className={styles.linkButton}>
+            <Link data-cy="promocoes-button" to={`/create-promocao`} className={styles.linkButton}>
               Promocoes Cadastradas
             </Link>
             <Link data-cy="promocoes-button" to={`/promocoes/user/${state.userId}`} className={styles.linkButton}>

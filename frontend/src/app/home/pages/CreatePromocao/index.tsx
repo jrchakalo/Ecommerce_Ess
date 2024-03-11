@@ -24,7 +24,7 @@ const CreatePromocao = () => {
   const onSubmit: SubmitHandler<PromocaoFormType> = async (body) => {
     service.createPromocao(body);
     reset();
-    //setValue("dataNascimento", "");
+    setValue("valor", "");
   };
 
   useEffect(() => {
@@ -32,15 +32,15 @@ const CreatePromocao = () => {
       state.createPromocaoRequestStatus !== prevState?.createPromocaoRequestStatus &&
       state.createPromocaoRequestStatus.isSuccess()
     ) {
-      alert("Usuário criado com sucesso! Você será rediriceionado para a página de login.");
+      alert("Promoção criada com sucesso! Você será redirecionad@ para a página de promoções cadastradas.");
     }else{
-      alert("Erro ao criar usuário! Tente novamente.");
+      alert("Erro ao criar Promoção! Tente novamente.");
     }
   }, [state, prevState]);
 
   return (
     <section className={styles.container}>
-      <h1 className={styles.title}>Cadastro de Usuário</h1>
+      <h1 className={styles.title}>Cadastro de Promoção</h1>
       <form className={styles.formContainer} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.formInputContainer}>
           <input
@@ -89,11 +89,11 @@ const CreatePromocao = () => {
           <input
             data-cy="input-validade"
             {...register("validade")}
-            placeholder="Digite seu email"
+            placeholder="Digite a condição de validade"
             className={styles.formInput}
           />
           {errors.validade && (
-            <span data-cy="input-email-error" className={styles.formError}>
+            <span data-cy="input-validade-error" className={styles.formError}>
               {errors.validade.message}
             </span>
           )}
@@ -105,7 +105,7 @@ const CreatePromocao = () => {
       </form>
   
       {state.createPromocaoRequestStatus.isSuccess() && (
-        <><p className={styles.successMessage}>Usuário criado com sucesso!</p><Navigate to="/login" replace /></>
+        <><p className={styles.successMessage}>Promoção criada com sucesso!</p><Navigate to="/promocoes" replace /></>
       )}
   
       {state.createPromocaoRequestStatus.isFailure() && (
