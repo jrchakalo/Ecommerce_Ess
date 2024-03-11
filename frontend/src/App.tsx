@@ -1,6 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import CreateUser from "./app/home/pages/CreateUser";
 import UpdateUser from "./app/home/pages/UpdateUser";
+import CreatePromocao from "./app/home/pages/CreatePromocao";
+import UpdatePromocao from "./app/home/pages/UpdatePromocao";
 import HomePage from "./app/home/pages/HomePage";
 import EmailsPage from "./app/home/pages/ListEmails";
 import EmailsSpam from "./app/home/pages/ListEmailsSpam";
@@ -9,6 +11,9 @@ import UserProfile from "./app/home/pages/UserProfile";
 import Logout from "./app/home/pages/Logout";
 import ProductPage from "./app/home/pages/ProductPage";
 import Carrinho from "./app/home/pages/Carrinho";
+import PromocaoProfile from "./app/home/pages/PromocaoProfile";
+import ListPromocoes from "./app/home/pages/ListPromocoes";
+import ListPromocoesUser from "./app/home/pages/ListPromocoesUser";
 
 const router = createBrowserRouter([
   {
@@ -54,8 +59,28 @@ const router = createBrowserRouter([
   {
     path: "/cart/:id",
     Component: Carrinho
-  }
-]);
+  },
+  {
+    path: "/update-promocao/:id",
+    Component: UpdatePromocao,
+  },
+  {
+    path: "/create-promocao",
+    Component: CreatePromocao,
+  },
+  {
+    path: "/promocao/:id",
+    Component: PromocaoProfile,
+  },
+  {
+    path: "/promocoes",
+    Component: ListPromocoes,
+  },
+  {
+    path: "/promocoes/user/:id",
+    Component: ListPromocoesUser,
+  },
+]); 
 
 export default function App() {
   return <RouterProvider router={router} fallbackElement={<p>Loading...</p>} />;
