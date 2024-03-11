@@ -25,10 +25,16 @@ export default class CarrinhoRepository extends BaseRepository<CarrinhoEntity> {
     public async getCarrinhoById(id: string): Promise<CarrinhoEntity | null> {
         const carrinhoJson = JSON.parse(fs.readFileSync('./src/models/carrinho.json', 'utf-8'));
 
-        for (const carrinho of carrinhoJson) {
-            if (carrinho.id === id) {
-                return carrinho;
-            }
+        // for (const carrinho of carrinhoJson) {
+        //     if (carrinho.id === id) {
+        //         return carrinho;
+        //     }
+        // }
+
+        // const carrinho = carrinhoJson.find((carrinho: any) => carrinho.id === id);
+
+        if (carrinhoJson.find((carrinho: any) => carrinho.id === id)) {
+            return carrinhoJson.find((carrinho: any) => carrinho.id === id);
         }
 
         return null;

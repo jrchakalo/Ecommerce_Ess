@@ -33,8 +33,8 @@ defineFeature(feature, (test) => {
         preco: 20.00,
         local: 'São Paulo',
     });
-    const mockUserData = new UserModel({
-        id: '1',
+    const userData = new UserModel({
+        id: "1",
         nome: 'Teste',
         cpf: '123.456.789-01',
         dataNascimento: '25/10/1999',
@@ -48,8 +48,38 @@ defineFeature(feature, (test) => {
         mockUserRepository = di.getRepository<UserRepository>(UserRepository);
         mockProductRepository = di.getRepository<ProductRepository>(ProductRepository);
         mockCarrinhoRepository = di.getRepository<CarrinhoRepository>(CarrinhoRepository);
-        fs.writeFileSync('./src/models/users.json', JSON.stringify([]));
-        fs.writeFileSync('./src/models/carrinho.json', JSON.stringify([]));
+
+        const user = new UserModel({
+            id: "1",
+            nome: 'Teste',
+            cpf: '123.456.789-01',
+            dataNascimento: '25/10/1999',
+            email: '',
+            login: 'teste',
+            senha: 'senhateste',
+            logado: false
+        })
+        const userCart = new CarrinhoModel({
+            id: "123",
+            id_produtos: [],
+            quantidade: 0,
+            data_criacao: new Date(),
+            data_atualizacao: new Date()
+        })
+        const product = new ProductModel({
+            nome: 'Piada Mortal',
+            id: '123.456.789-01',
+            quantidade: 7,
+            preco: 20.00,
+            local: 'São Paulo',
+        })
+
+        userService = new UserService(mockUserRepository);
+        userService.createUser(user);
+        productService = new ProductService(mockProductRepository);
+        productService.createProduct(product);
+        carrinhoService = new CarrinhoService(mockCarrinhoRepository);
+        carrinhoService.createCarrinho(userCart);
     });
 
     test('Adicionar item ao carrinho', ({given, when, then, and}) => {

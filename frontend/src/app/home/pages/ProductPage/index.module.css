@@ -1,0 +1,99 @@
+/* Estilo para o container principal */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Estilo para o cabeçalho */
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .title {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .subtitle {
+    font-size: 18px;
+    color: #666;
+  }
+  
+  /* Estilo para os botões de navegação */
+  .linkButton {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 10px 15px;
+    font-size: 16px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #e44d26;
+    border-radius: 5px;
+  }
+  
+  /* Estilo para a seção do produto */
+  .productSection {
+    text-align: center;
+  }
+  
+  /* Estilo para o contêiner do produto */
+  .productContainer {
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Estilo para a caixa do produto */
+  .productBox {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+  }
+  
+  .productBox:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Estilo para a imagem do produto */
+  .productImage {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Estilo para as informações do produto */
+  .productInfo {
+    padding: 15px;
+  }
+  
+  .productName {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .productPrice {
+    font-size: 18px;
+    color: #e44d26;
+  }
+  
+  /* Estilo para o botão de compra */
+  .productButton {
+    background-color: #e44d26;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .productButton:hover {
+    background-color: #333;
+  }
+  

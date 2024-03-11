@@ -9,6 +9,8 @@ import EmailsSpam from "./app/home/pages/ListEmailsSpam";
 import Login from "./app/home/pages/Login";
 import UserProfile from "./app/home/pages/UserProfile";
 import Logout from "./app/home/pages/Logout";
+import ProductPage from "./app/home/pages/ProductPage";
+import Carrinho from "./app/home/pages/Carrinho";
 import PromocaoProfile from "./app/home/pages/PromocaoProfile";
 import ListPromocoes from "./app/home/pages/ListPromocoes";
 import ListPromocoesUser from "./app/home/pages/ListPromocoesUser";
@@ -49,6 +51,14 @@ const router = createBrowserRouter([
   {
     path: "/logout/:id",
     Component: Logout
+  },
+  {
+    path: "/product/:id",
+    Component: ProductPage
+  },
+  {
+    path: "/cart/:id",
+    Component: Carrinho
   },
   {
     path: "/update-promocao/:id",
