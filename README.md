@@ -17,7 +17,7 @@
 <div>
   <h2> Descrição do Projeto </h2>
   <p3><p>Esse projeto foi desenvolvido para cadeira de Engenharia de Software no Centro de Informática (CIn) da UFPE. A proposta é desenvolver um site de Ecommerce utilizando as metodologias e técnicas estudadas no curso.
-    <p>O Ecommerce em questão se tratou de uma livraria online inspirada com o nome do famoso autor de obras de aventura, Julio Verne. O projeto foi desenvolvido utlizando JavaScript e React, e foi utilizado o projeto base da disciplina.</p3>
+    <p>O Ecommerce em questão se trata de uma livraria online com o nome inspirado no famoso autor de obras de aventura, Julio Verne. O projeto foi desenvolvido utlizando Node.js e React, foi utilizado o projeto base da disciplina para o desenvolvimento.</p3>
 </div><br>
 
 <div>
@@ -45,7 +45,7 @@ VITE_API_URL=http://localhost:5001/api
 
  
 * [JavaScript](https://www.javascript.com/): linguagem utilizada.
-* [NodeJs](https://nodejs.org/en): interpretador de JavaScript.
+* [Node.js](https://nodejs.org/en): interpretador de JavaScript.
 * [TypeScript](https://www.typescriptlang.org/): superconjunto sintático.
 * [React](https://react.dev/): biblioteca de frontend.
 * [NPM](https://www.npmjs.com/): gerenciador de pacotes.
