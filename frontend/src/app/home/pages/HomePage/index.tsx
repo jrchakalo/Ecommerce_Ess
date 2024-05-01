@@ -5,7 +5,7 @@ import styles from "./index.module.css";
 import { LoginContext } from "../../context/LoginContext";
 import { useContext} from "react";
 import 'semantic-ui-css/semantic.min.css';
-import { Form, Grid, Header, Button, Segment, Divider, Image } from "semantic-ui-react"; 
+import { Button, Divider } from "semantic-ui-react"; 
 
 const HomePage = () => {
   const { state } = useContext(LoginContext);

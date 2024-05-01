@@ -4,7 +4,6 @@ import { CarrinhoStateAction } from "./types";
 import RequestStatus from "../../../../shared/types/request-status";
 import CarrinhoModel from "../../models/CarrinhoModel";
 import { AppUnknownError } from "../../../../shared/errors/app-error";
-import { rmSync } from "fs";
 
 export default class CarrinhoService {
     public apiService: ApiService;
