@@ -1,4 +1,5 @@
 {
+  "homepage": "https://jrchakalo.github.io/Livraria-Julio-Verne",
   "name": "frontend-react-ess",
   "private": true,
   "version": "0.1.0",
@@ -17,7 +18,9 @@
     "cy:e2e-interactive": "start-server-and-test testing http-get://localhost:3000 cy:open-e2e",
     "cy:e2e-headless": "start-server-and-test testing http-get://localhost:3000 cy:run-e2e",
     "cy:show-coverage": "open ./cypress-coverage/lcov-report/index.html",
-    "inputmask": "npm install react-input-mask"
+    "inputmask": "npm install react-input-mask",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.1.0",
