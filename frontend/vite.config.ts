@@ -11,7 +11,6 @@ export default defineConfig({
       requireEnv: false,
     }),
   ],
-  base: "/Livraria-Julio-Verne",
   server: {
     port: 3000,
   },
