@@ -18,7 +18,7 @@ const Logout = () => {
     handleLogout();
   }, [service, state.userId]);
 
-  return <Navigate to="/home"/>;
+  return <Navigate to="/"/>;
 };
 
 export default Logout;
