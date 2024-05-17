@@ -1,7 +1,10 @@
 import app from './app';
 import logger from './logger';
-import Env from './env';
 
-app.listen(Env.PORT, () => {
-  logger.info(`Server started on http://localhost:${Env.PORT}/api`);
+require('dotenv').config();
+
+const PORT = process.env.PORT || 5001;
+
+app.listen(PORT, () => {
+  logger.info(`Server started on http://localhost:${PORT}/api`);
 });
