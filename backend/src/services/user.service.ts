@@ -2,7 +2,7 @@ import UserEntity from '../entities/user.entity'; // Importa a entidade de usuá
 import UserModel from '../models/user.model'; // Importa o modelo de usuário
 import UserRepository from '../repositories/user.repository'; // Importa o repositório de usuário
 import fs from 'fs'; // Importa o módulo de manipulação de arquivos
-const userJsonPath = './src/models/users.json'; // Caminho para o arquivo JSON de usuários
+const userJsonPath = './src/db/users.json'; // Caminho para o arquivo JSON de usuários
 
 class UserService {
     private userRepository: UserRepository;

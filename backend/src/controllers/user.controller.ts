@@ -5,7 +5,7 @@ import UserEntity from '../entities/user.entity';
 import CarrinhoService from '../services/carrinho.service';
 import fs from 'fs'; // Importe o módulo de manipulação de arquivos
 import CarrinhoEntity from '../entities/carrinho.entity';
-const userJsonPath = './src/models/users.json'; // Caminho para o arquivo JSON de usuários
+const userJsonPath = './src/db/users.json'; // Caminho para o arquivo JSON de usuários
 
 class UserController {
   private prefix: string = '/users';

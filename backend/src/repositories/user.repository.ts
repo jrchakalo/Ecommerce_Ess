@@ -1,7 +1,7 @@
 import UserEntity from '../entities/user.entity'; // Importa a entidade de usuário
 import BaseRepository from './base.repository'; // Importa o repositório base
 import fs from 'fs'; // Importa o módulo de manipulação de arquivos
-const userJsonPath = './src/models/users.json'; // Caminho para o arquivo JSON de usuários
+const userJsonPath = './src/db/users.json'; // Caminho para o arquivo JSON de usuários
 
 class UserRepository extends BaseRepository<UserEntity> {
   constructor() {
